@@ -1,15 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import $ from 'jquery';
-import Popper from 'popper.js';
+/* App is the entry point to the React code.*/
+import AirApp from './components/AirApp';
+/* import BrowserRouter from 'react-router-dom' */
+import { BrowserRouter } from "react-router-dom";
+//import $ from 'jquery';
+
+/* Bootstrap imports */
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.js';
+
+/* Custom CSS */
 import './shared/css/resets.css';
 import './shared/css/shared.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
-import AirApp from './components/AirApp';
 
 ReactDOM.render(
   <React.StrictMode>
-    <AirApp />
+    <BrowserRouter>
+      <AirApp />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
