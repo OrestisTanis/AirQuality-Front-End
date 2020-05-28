@@ -4,12 +4,16 @@ import Navbar from './navbar/navbar';
 import Footer from './footer/footer';
 import Home from './home/home';
 import LandingPage from './landing-page/landing-page';
+import SignUp from './sign-up/sign-up';
+import Login from './login/login';
 
 
 function AirApp() {
     return (
         <>  
             <Navbar></Navbar>
+            <Route path="/login" component={Login} />
+            <Route path="/sign-up" component={SignUp} />
             <Route exact={true} path="/" component={LandingPage} />
             <Route path="/home" component={Home} />
             <Footer></Footer>

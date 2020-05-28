@@ -27,10 +27,10 @@ function Navbar() {
                     </ul>
                     {/* LOGIN, SIGN-UP BUTTONS  */}
                     <div className="d-flex justify-content-center ml-md-auto">
-                        <button className="btn" type="button">Login</button>
+                        <button className="btn" type="button"><Link to="/login" className="nav-link">Login</Link></button>
                     </div>
                     <div className="d-flex justify-content-center">
-                        <button className="btn" type="button">Sign-Up</button>
+                        <button className="btn" type="button"><Link to="/sign-up" className="nav-link">Sign-up</Link></button>
                     </div>
                 </div>
             </nav>
