@@ -1,0 +1,13 @@
+.signup-errors {
+    color: red;
+    /* position: relative; */
+    /* top: -0.7rem;*/
+    /* visibility: hidden;  */
+    
+}
+.show {
+    visibility: visible;
+}
+.hide {
+    visibility: hidden;
+}
