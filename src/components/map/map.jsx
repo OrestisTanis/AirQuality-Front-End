@@ -1,12 +1,12 @@
 import React from 'react';
 
-function Home(){
+function Map(){
     return (
         <p>Home</p>
     )
 }
 
-export default Home;
+export default Map;
 
 
 

@@ -95,10 +95,13 @@ function Navbar() {
                             {/* LINKS */}
                             <ul className="navbar-nav d-flex justify-content-center text-center">
                                 <li className="nav-item">
-                                    <Link to="/home" className="nav-link" style={textColor} onClick={toggleNavbar}>Home</Link>
+                                    <Link to="/map" className="nav-link" style={textColor} onClick={toggleNavbar}>Map</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#" style={textColor} onClick={toggleNavbar}>Our Products</a>
+                                    <Link to="/products" className="nav-link" style={textColor} onClick={toggleNavbar}>Products</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link to="/company" className="nav-link" style={textColor} onClick={toggleNavbar}>Our Company</Link>
                                 </li>
                             </ul>
                             {/* LOGIN, SIGN-UP BUTTONS  */}
