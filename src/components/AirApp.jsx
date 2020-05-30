@@ -6,12 +6,14 @@ import Home from './home/home';
 import LandingPage from './landing-page/landing-page';
 import SignUp from './sign-up/sign-up';
 import Login from './login/login';
+import ScrollToTop from './scrollToTop/scrollToTop';
 
 
 
 function AirApp() {
     return (
         <>  
+            <ScrollToTop/>
             <Navbar></Navbar>
             <Route path="/login" component={Login} />
             <Route path="/sign-up" component={SignUp} />

@@ -11,8 +11,6 @@ function Navbar() {
     const endNavBgColor = { backgroundColor: "rgb(238, 238, 238)" };
     const startTextColor = { color: "white" };
     const endTextColor = { color: "black" };
-    // Elements
-    const toggleButton = document.querySelector(".navbar-collapse, .collapse");
 
     // Hooks
     const history = useHistory();
@@ -20,11 +18,15 @@ function Navbar() {
     let [navScrollStyle, setNavScrollStyle] = useState(starPadding);
     let [navScrollColor, setNavScrollColor] = useState(startNavBgColor);
     let [textColor, setTextColor] = useState(startTextColor);
+    let [toggleButton, setToggleButton] = useState({});
+    
 
-    // This hook will be executed again each time the url changes
+    // This hook will be executed after component render and again each time the url changes
     useEffect(function update() {
         let bgVideo = document.getElementById("video-bg") || null;
         let bgVideoHeight = bgVideo ? bgVideo.offsetHeight : 0;
+
+        setToggleButton(document.querySelector(".navbar-collapse, .collapse"));
 
         console.log("BGVIDEOHEIGHT: ", bgVideoHeight);
         // Reset styles on url change
@@ -59,12 +61,11 @@ function Navbar() {
                 }
             }
         }
-        
-        
         document.addEventListener('scroll', handleScroll);
     }, [pathName]);
 
    function toggleNavbar(){
+       console.log(toggleButton);
         if (toggleButton.classList.contains('show')) toggleButton.classList.remove('show');
    }
 
@@ -82,7 +83,7 @@ function Navbar() {
                     {/* NAVBAR  */}
                     <nav className="navbar navbar-expand-lg navbar-light" style={navScrollStyle}>
                         {/* BRAND NAME  */}
-                        <div className="pl-2"><Link to="/" className="navbar-brand" onClick={toggleNavbar}><h4 style={textColor}  >AirSense</h4></Link></div>
+                        <div className="pl-2"><Link to="/" className="navbar-brand"><h4 style={textColor} onClick={toggleNavbar}>AirSense</h4></Link></div>
                         <button className="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                             aria-label="Toggle navigation">
