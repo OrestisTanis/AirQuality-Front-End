@@ -8,7 +8,7 @@ function Navbar() {
     // These two hooks are used for changing the navbar style on scroll
     const starPadding = { paddingTop: "1.1rem", paddingBottom: "1.1rem" };
     const endPadding = { paddingTop: "0.2rem", paddingBottom: "0.2rem" };
-    const startNavBgColor = { backgroundColor: "rgba(0,0,0,0.05)" };
+    const startNavBgColor = { backgroundColor: "rgba(0,0,0,0.0)" };
     const endNavBgColor = { backgroundColor: "rgb(238, 238, 238)" };
     const startTextColor = { color: "white"};
     const endTextColor = { color: "black" };
@@ -18,7 +18,7 @@ function Navbar() {
 
     useEffect(function update() {       
         function handleScroll() {
-            const backgroundVideoHeight = document.getElementById("videoBG").offsetHeight;
+            const backgroundVideoHeight = document.getElementById("video-bg").offsetHeight;
             // Padding
             if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
                 setNavScrollStyle(endPadding);
@@ -37,9 +37,6 @@ function Navbar() {
         }
         document.addEventListener('scroll', handleScroll);
     }, []);
-
-
-
 
     return (
         <>
