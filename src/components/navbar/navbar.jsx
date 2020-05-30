@@ -11,6 +11,8 @@ function Navbar() {
     const endNavBgColor = { backgroundColor: "rgb(238, 238, 238)" };
     const startTextColor = { color: "white" };
     const endTextColor = { color: "black" };
+    // Elements
+    const toggleButton = document.querySelector(".navbar-collapse, .collapse");
 
     // Hooks
     const history = useHistory();
@@ -24,6 +26,17 @@ function Navbar() {
         let bgVideo = document.getElementById("video-bg") || null;
         let bgVideoHeight = bgVideo ? bgVideo.offsetHeight : 0;
 
+        console.log("BGVIDEOHEIGHT: ", bgVideoHeight);
+        // Reset styles on url change
+        if (bgVideoHeight === 0) {
+            setNavScrollColor(endNavBgColor);
+            setTextColor(endTextColor);
+        }
+        else {
+            setNavScrollColor(startNavBgColor);
+            setTextColor(startTextColor);
+        }
+
         // This function will be called every time the user scrolls
         function handleScroll() {
             bgVideo = document.getElementById("video-bg") || null;
@@ -34,7 +47,7 @@ function Navbar() {
             } else {
                 setNavScrollStyle(starPadding);
             }
-            console.log("BGVIDEOHEIGHT: ", bgVideoHeight);
+            
             // Change navbar and text color (We want to change this only in the landing page, where the bgVideoHeight is bigger than 0)
             if (bgVideoHeight > 0) {
                 if (document.body.scrollTop > bgVideoHeight || document.documentElement.scrollTop > bgVideoHeight) {
@@ -47,17 +60,13 @@ function Navbar() {
             }
         }
         
-        // Reset styles on url change
-        if (bgVideoHeight === 0) {
-            setNavScrollColor(endNavBgColor);
-            setTextColor(endTextColor);
-        }
-        else {
-            setNavScrollColor(startNavBgColor);
-            setTextColor(startTextColor);
-        }
+        
         document.addEventListener('scroll', handleScroll);
     }, [pathName]);
+
+   function toggleNavbar(){
+        if (toggleButton.classList.contains('show')) toggleButton.classList.remove('show');
+   }
 
     // To keep track of the url
     useEffect(() => {
@@ -73,7 +82,7 @@ function Navbar() {
                     {/* NAVBAR  */}
                     <nav className="navbar navbar-expand-lg navbar-light" style={navScrollStyle}>
                         {/* BRAND NAME  */}
-                        <div className="pl-2"><Link to="/" className="navbar-brand" style={textColor}>AirSense</Link></div>
+                        <div className="pl-2"><Link to="/" className="navbar-brand" style={textColor}  onClick={toggleNavbar}>AirSense</Link></div>
                         <button className="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                             aria-label="Toggle navigation">
@@ -81,22 +90,22 @@ function Navbar() {
                         </button>
 
                         {/* LINKS, LOGIN, SIGN-UP BUTTONS  */}
-                        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div className="collapse navbar-collapse" id="navbarSupportedContent" >
                             {/* LINKS */}
                             <ul className="navbar-nav d-flex justify-content-center text-center">
                                 <li className="nav-item">
-                                    <Link to="/home" className="nav-link" style={textColor}>Home</Link>
+                                    <Link to="/home" className="nav-link" style={textColor} onClick={toggleNavbar}>Home</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#" style={textColor}>Our Products</a>
+                                    <a className="nav-link" href="#" style={textColor} onClick={toggleNavbar}>Our Products</a>
                                 </li>
                             </ul>
                             {/* LOGIN, SIGN-UP BUTTONS  */}
                             <div className="d-flex justify-content-center ml-md-auto">
-                                <button className="btn" type="button"><Link to="/login" className="nav-link" style={textColor}>Login</Link></button>
+                                <button className="btn" type="button"><Link to="/login" className="nav-link" style={textColor} onClick={toggleNavbar}>Login</Link></button>
                             </div>
                             <div className="d-flex justify-content-center">
-                                <button className="btn" type="button"><Link to="/sign-up" className="nav-link" style={textColor}>Sign-up</Link></button>
+                                <button className="btn" type="button"><Link to="/sign-up" className="nav-link" style={textColor} onClick={toggleNavbar}>Sign-up</Link></button>
                             </div>
                         </div>
                     </nav>
