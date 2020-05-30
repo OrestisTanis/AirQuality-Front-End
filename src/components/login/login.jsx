@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import '../../shared/css/validation-errors.css';
 
 function Login(){
     const starStyle = {
@@ -48,8 +49,15 @@ function Login(){
         .then(res => {
             console.log(res);
             console.log(res.data);
+            // Saving the token in client's local storage
+            localStorage.setItem("token", res.data.token);
         }).catch(error => {
-            console.log(error.message);
+            console.log(error);
+            if (error.message === "Request failed with status code 401"){
+                const errors = {};
+                errors.invalidCredentials = "Invalid username or password.";
+                setErrors(errors);
+            }
         })
     }
 
@@ -62,7 +70,7 @@ function Login(){
                             <h5>Member Login</h5>
                         </div>
                         <div className="col-12">
-                            <form className="mt-4 mb-5" id="login-form" onSubmit={handleLogin}>
+                            <form className="mt-4 mb-4" id="login-form" onSubmit={handleLogin}>
                                 <div className="form-group">
                                     <label htmlFor="username">Username</label>
                                     <input type="text" name="username" id="username" className="form-control" />
@@ -71,12 +79,15 @@ function Login(){
                                     </small>
                                 </div>
 
-                                <div className="form-group">
+                                <div className="form-group mb-0">
                                     <label htmlFor="password">Password</label>
                                     <input type="password" name="password" id="password" className="form-control" />
                                     <small className={(errors.password ? "show" : "hide") + " signup-errors"}>
                                         {errors.password + ""}
                                     </small>
+                                </div>
+                                <div className={(errors.invalidCredentials ? "show" : "hide") + " signup-errors text-center"}>
+                                    {errors.invalidCredentials + ""} 
                                 </div>
                             </form>
                             <div className="d-flex justify-content-center">

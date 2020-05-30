@@ -1,0 +1,9 @@
+.signup-errors {
+    color: red;
+}
+.show {
+    visibility: visible;
+}
+.hide {
+    visibility: hidden;
+}

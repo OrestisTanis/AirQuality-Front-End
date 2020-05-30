@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import './sign-up.css';
+import '../../shared/css/validation-errors.css';
 
 function SignUp() {
     const starStyle = {
