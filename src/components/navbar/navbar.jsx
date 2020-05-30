@@ -82,7 +82,7 @@ function Navbar() {
                     {/* NAVBAR  */}
                     <nav className="navbar navbar-expand-lg navbar-light" style={navScrollStyle}>
                         {/* BRAND NAME  */}
-                        <div className="pl-2"><Link to="/" className="navbar-brand" style={textColor}  onClick={toggleNavbar}>AirSense</Link></div>
+                        <div className="pl-2"><Link to="/" className="navbar-brand" onClick={toggleNavbar}><h4 style={textColor}  >AirSense</h4></Link></div>
                         <button className="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                             aria-label="Toggle navigation">

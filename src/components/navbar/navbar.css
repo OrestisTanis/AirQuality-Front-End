@@ -24,3 +24,6 @@ button.navbar-toggler:focus {
     outline: none;
     outline: none;
 }
+.navbar-brand{
+    padding-bottom: 0.5rem !important;
+}
