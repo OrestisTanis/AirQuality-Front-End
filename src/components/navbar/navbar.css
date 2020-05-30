@@ -1,0 +1,26 @@
+.nav-outer-container {
+    position: fixed;
+    background-color: rgba(255,255,255,0);
+    z-index: 10;
+    transition: all 0.3s linear;
+}
+.nav-outer-container *{
+    /* color:inherit!important; */
+    transition: all 0.3s linear;
+}
+.navbar {
+    background-color: rgba(255,255,255,0);
+    transition: all 0.3s ease-in-out;
+    
+}
+.navbar-light .navbar-toggler {
+    color: rgba(0,0,0,.5);
+    border:none; 
+}
+.navbar-toggler-icon:focus {
+    outline: none;
+}
+button.navbar-toggler:focus {
+    outline: none;
+    outline: none;
+}

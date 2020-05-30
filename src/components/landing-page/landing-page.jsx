@@ -2,13 +2,13 @@ import React from 'react';
 import MainFeature from './main-feature';
 import SecondaryFeature from './secondary-feature';
 import Plan from './plan';
+import BackgroundVideo from './background-video';
 
 
 function LandingPage() {
     return (
-        <>
-            <p>Background Video</p>
-
+        <>  
+            <BackgroundVideo></BackgroundVideo>
             <div className="container-fluid">
                 <div className="container">
                     <div className="row text-center mt-5 mb-5">

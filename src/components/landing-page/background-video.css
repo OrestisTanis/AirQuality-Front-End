@@ -1,0 +1,28 @@
+body {
+    overflow-x: hidden;
+ } 
+ 
+ #videoBG {
+    position:absolute;
+    z-index: -1;
+    max-height: 100vh;
+    object-fit: cover; 
+} 
+@media (min-aspect-ratio: 16/9){
+    #videoBG{
+        width: 100%;
+        height: auto;
+    }
+}
+@media (max-aspect-ratio: 16/9){
+    #videoBG{
+        width: auto;
+        height: 100%;
+    }
+}
+@media (max-width: 767px){
+    #videoBG {
+        display: none;
+    }
+
+} 
