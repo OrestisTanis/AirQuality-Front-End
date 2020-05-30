@@ -49,7 +49,7 @@ function SignUp() {
         if (!formData.password) errors.password = "Password is required";
         else if (formData.password.length < 6) errors.password = "Password must be at least 6 characters long"
         if (!formData.repeatPassword) errors.repeatPassword = "Please confirm password";
-        else if (!formData.password != formData.repeatPassword) errors.repeatPassword = "Passwords don't match";
+        else if (!formData.password !== formData.repeatPassword) errors.repeatPassword = "Passwords don't match";
         // Terms & Conditions
         if (!formData.agreeTerms) errors.agreeTerms = "Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy";
         console.log(errors);

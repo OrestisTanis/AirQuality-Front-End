@@ -8,9 +8,7 @@ function SocialMediaIcon(props) {
     }
 
     return (
-        //<img src={facebookIcon} alt="social media icon" style={style}/>
-         //<svg src={facebookIcon} alt="social media icon" style={style}/>
-        <object data={props.icon} style={style} className={props.className}></object>
+        <object data={props.icon} style={style} className={props.className} aria-label="social icons"></object>
     )
 }
 

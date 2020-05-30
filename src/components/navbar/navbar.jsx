@@ -34,13 +34,16 @@ function Navbar() {
             } else {
                 setNavScrollStyle(starPadding);
             }
+            console.log("BGVIDEOHEIGHT: ", bgVideoHeight);
             // Change navbar and text color (We want to change this only in the landing page, where the bgVideoHeight is bigger than 0)
-            if (bgVideoHeight > 0 && (document.body.scrollTop > bgVideoHeight || document.documentElement.scrollTop > bgVideoHeight)) {
-                setNavScrollColor(endNavBgColor);
-                setTextColor(endTextColor);
-            } else {
-                setNavScrollColor(startNavBgColor);
-                setTextColor(startTextColor);
+            if (bgVideoHeight > 0) {
+                if (document.body.scrollTop > bgVideoHeight || document.documentElement.scrollTop > bgVideoHeight) {
+                    setNavScrollColor(endNavBgColor);
+                    setTextColor(endTextColor);
+                } else {
+                    setNavScrollColor(startNavBgColor);
+                    setTextColor(startTextColor);
+                }
             }
         }
         
