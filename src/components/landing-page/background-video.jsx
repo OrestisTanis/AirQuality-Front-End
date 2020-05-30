@@ -12,7 +12,7 @@ function BackgroundVideo(props) {
             </video>
             <div className="video-bg-overlay"></div>
             {/* SPACER */}
-            <div style={{height: "100vh"}}></div>
+            <div id="spacer-100vh" style={{height: "100vh"}}></div>
         </>
     )
 }

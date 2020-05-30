@@ -1,33 +1,41 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import './navbar.css';
 
 
 function Navbar() {
-
-    // These two hooks are used for changing the navbar style on scroll
+    // Styles
     const starPadding = { paddingTop: "1.1rem", paddingBottom: "1.1rem" };
     const endPadding = { paddingTop: "0.2rem", paddingBottom: "0.2rem" };
     const startNavBgColor = { backgroundColor: "rgba(0,0,0,0.0)" };
     const endNavBgColor = { backgroundColor: "rgb(238, 238, 238)" };
-    const startTextColor = { color: "white"};
+    const startTextColor = { color: "white" };
     const endTextColor = { color: "black" };
+
+    // Hooks
+    const history = useHistory();
+    const [pathName, setPathName] = useState("/");
     let [navScrollStyle, setNavScrollStyle] = useState(starPadding);
     let [navScrollColor, setNavScrollColor] = useState(startNavBgColor);
-    let [textColor, setTextColor ] = useState(startTextColor);
+    let [textColor, setTextColor] = useState(startTextColor);
 
-    useEffect(function update() {       
+    // This hook will be executed again each time the url changes
+    useEffect(function update() {
+        let bgVideo = document.getElementById("video-bg") || null;
+        let bgVideoHeight = bgVideo ? bgVideo.offsetHeight : 0;
+
+        // This function will be called every time the user scrolls
         function handleScroll() {
-            const backgroundVideoHeight = document.getElementById("video-bg").offsetHeight;
-            // Padding
+            bgVideo = document.getElementById("video-bg") || null;
+            bgVideoHeight = bgVideo ? bgVideo.offsetHeight : 0;
+            // Change padding
             if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
                 setNavScrollStyle(endPadding);
             } else {
                 setNavScrollStyle(starPadding);
             }
-            // Color
-            if (document.body.scrollTop > backgroundVideoHeight || document.documentElement.scrollTop > backgroundVideoHeight) {
-                console.log("CHANGING BACKGROUND COLOR");
+            // Change navbar and text color (We want to change this only in the landing page, where the bgVideoHeight is bigger than 0)
+            if (bgVideoHeight > 0 && (document.body.scrollTop > bgVideoHeight || document.documentElement.scrollTop > bgVideoHeight)) {
                 setNavScrollColor(endNavBgColor);
                 setTextColor(endTextColor);
             } else {
@@ -35,8 +43,25 @@ function Navbar() {
                 setTextColor(startTextColor);
             }
         }
+        
+        // Reset styles on url change
+        if (bgVideoHeight === 0) {
+            setNavScrollColor(endNavBgColor);
+            setTextColor(endTextColor);
+        }
+        else {
+            setNavScrollColor(startNavBgColor);
+            setTextColor(startTextColor);
+        }
         document.addEventListener('scroll', handleScroll);
-    }, []);
+    }, [pathName]);
+
+    // To keep track of the url
+    useEffect(() => {
+        return history.listen((location) => {
+            setPathName(location.pathname);
+        })
+    }, [history])
 
     return (
         <>
