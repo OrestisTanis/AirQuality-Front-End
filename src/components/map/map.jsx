@@ -14,7 +14,7 @@ function Map() {
         <div style={{paddingTop: padTop}}>
             <LeafletMap center={position} zoom={zoomLvl} style={{ width: "100vw", height: `calc(100vh - ${padTop})`, zIndex:5 }}>
                 <TileLayer
-                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    attribution='Maps &nbsp;&copy;'
                     url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
                 />
                 <Marker position={position}>
