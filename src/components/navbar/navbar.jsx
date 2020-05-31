@@ -92,6 +92,17 @@ function Navbar() {
         history.push(path);
     }
 
+    // CHAT
+    // useEffect(() => {
+    //     const script = document.createElement('script');
+    //     script.src = "https://userlike-cdn-widgets.s3-eu-west-1.amazonaws.com/881d3b53a69dd16d6ffc7bcdbc10abdda9e12423c56b349d377f7fd6f12d2709.js";
+    //     script.async = true;
+    //     document.body.appendChild(script);
+    //     return (() => {
+    //         document.body.removeChild(script)
+    //     })
+    // }, []);
+
     return (
         <>
             <div className="container-fluid p-0 nav-outer-container text-white" style={navScrollColor} >
@@ -105,6 +116,8 @@ function Navbar() {
                             aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
+
+                       
 
                         {/* LINKS, LOGIN, SIGN-UP BUTTONS  */}
                         <div className="collapse navbar-collapse" id="navbarSupportedContent" >
@@ -131,7 +144,7 @@ function Navbar() {
                                         </div></>
                                     :
                                     <div className="d-flex justify-content-center ml-md-auto">
-                                        <button className="btn" type="button"><Link to="/" className="nav-link"  data-toggle="modal" data-target="#exampleModal" style={textColor} onClick={toggleNavbar}>Sign out</Link></button>
+                                        <button className="btn" type="button"><Link to="/" className="nav-link" data-toggle="modal" data-target="#exampleModal" style={textColor} onClick={toggleNavbar}>Sign out</Link></button>
                                     </div>
                             }
                         </div>
