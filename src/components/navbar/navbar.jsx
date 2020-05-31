@@ -134,11 +134,11 @@ function Navbar() {
                                         <button className="btn" type="button"><Link to="/" className="nav-link"  data-toggle="modal" data-target="#exampleModal" style={textColor} onClick={toggleNavbar}>Sign out</Link></button>
                                     </div>
                             }
-
                         </div>
                     </nav>
                 </div>
             </div>
+            {/* <div style={{height: '7rem'}}></div> */}
 
             {/* Sign Out Modal */}
             <div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
