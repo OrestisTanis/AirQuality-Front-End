@@ -35,5 +35,13 @@ body {
     #video-bg {
         display: none;
     }
-
+} 
+#image-poster {
+    position:absolute;
+    height: 100vh;
+    z-index: -5;
+    max-height: 100vh;
+    object-fit:cover; 
+    
+    object-position:70% 50%;
 } 
