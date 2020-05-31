@@ -1,14 +1,18 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import '../../shared/css/validation-errors.css';
+import useUserState from '../user-state';
 
 function Login(){
     const starStyle = {
         color: "rgba(253, 17, 17, 0.7)"
     };
-
+    // The user's global state
+    const [userState, setUserState] = useUserState();
+    // Private state used for error handling
     const [errors, setErrors]=useState({});
 
+    // Handler for the form submit event
     function handleLogin(event) {
         event.preventDefault();
         const elements = event.currentTarget.elements;
@@ -21,39 +25,39 @@ function Login(){
         }
     }
 
+    // Creates an error object and adds the corresponding 
+    // properties in case of invalid data. Used by the handler function
     function validateForm(formData) {
         const errors = {}
         // Username
         if (!formData.username) errors.username = "Username is required";
-        // else if (formData.username.length < 5) errors.username ="Username must be at least 5 characters long";
-        // else if (!validateUserName(formData.username)) errors.username = "Username can contain only english letters and numbers";
         // Password
         if (!formData.password) errors.password = "Password is required";
-        // else if (formData.password.length < 6) errors.password = "Password must be at least 6 characters long"
         return errors;
     }
-    // function validateUserName(userName) {
-    //     const regex = RegExp("^[a-zA-Z0-9]+$");
-    //     return regex.test(String(userName));
-    // }
 
+    // Gets called only if the form has no errors upon submit.
+    // Used by the handler function
     function doLogin(userInfo) {
         // Go to the server || dispatch an action
         axios.post(`http://localhost:8080/authenticate`, userInfo, {
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
-                // Authorization: 'Bearer ' + token // if you use token
+                //Authorization: 'Bearer ' + token // if you use token
             }
         })
         .then(res => {
+            // Handle successful login
             console.log(res);
             console.log(res.data);
             // Saving the token in client's local storage
             localStorage.setItem("token", res.data.token);
+            setUserState(state => ({...state, isLoggedIn: true}));
         }).catch(error => {
             console.log(error);
-            if (error.message === "Request failed with status code 401"){
+            // Handle invalid credentials
+            if (error.message){
                 const errors = {};
                 errors.invalidCredentials = "Invalid username or password.";
                 setErrors(errors);

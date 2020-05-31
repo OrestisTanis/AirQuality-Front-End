@@ -1,35 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import jwtDecode from 'jwt-decode';
+import useUserState from '../user-state';
+import isJWTExpiredOrNull from '../validate-jwt';
 
 function AuthGuard(props) {
-    let [isLoggedIn, setIsLoggedIn] = useState(false);
     let history = useHistory();
+    // global state
+    const [userState, setUserState] = useUserState();
 
     function setLoginStatusUsingJWT(){
-        // Get token from jwt stored in client
-        let token = localStorage.getItem("token");
-        if (token) {
-            // Get a date object based on the expiration date of the jwt
-            const utcSeconds = jwtDecode(token).exp
-            const expDateTime = new Date(0);
-            expDateTime.setUTCSeconds(utcSeconds);
-
-            // Create a date object with the current date
-            const dateTimeNow = new Date();
-
-            // Check if token has expired and act accordingly
-            if (dateTimeNow > expDateTime) {
-                console.log("token has expired");
-                setIsLoggedIn(false);
-            }
-            else {
-                console.log("token has not expired. you are logged in.")
-                setIsLoggedIn(true);
-            }
+        // Get token from jwt stored in client and validate the expiration date
+        const token = localStorage.getItem("token");
+        const tokenExpired = isJWTExpiredOrNull(token);
+        if (!tokenExpired) {
+            console.log("AuthGuard: token has not expired. you are logged in.")
+            setUserState({isLoggedIn: true});
         }
         else {
-            setIsLoggedIn(false);
+            console.log("AuthGuard: token has expired or doesn't exist. Please log in.")
+            setUserState({isLoggedIn: false});
         }
     }
 

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import './navbar.css';
+import usePathNameState from '../pathname-state';
 
 
 function Navbar() {
     // Styles
-    const starPadding = { paddingTop: "1.1rem", paddingBottom: "1.1rem" };
+    const startPadding = { paddingTop: "1.1rem", paddingBottom: "1.1rem" };
     const endPadding = { paddingTop: "0.2rem", paddingBottom: "0.2rem" };
     const startNavBgColor = { backgroundColor: "rgba(0,0,0,0.0)" };
     const endNavBgColor = { backgroundColor: "rgb(238, 238, 238)" };
@@ -13,21 +14,35 @@ function Navbar() {
     const endTextColor = { color: "black" };
 
     // Hooks
-    const history = useHistory();
-    const [pathName, setPathName] = useState("/");
-    let [navScrollStyle, setNavScrollStyle] = useState(starPadding);
-    let [navScrollColor, setNavScrollColor] = useState(startNavBgColor);
-    let [textColor, setTextColor] = useState(startTextColor);
-    let [toggleButton, setToggleButton] = useState({});
-    
+    // const history = useHistory();
+    const [pathName, setPathName] = usePathNameState();
+    const [navScrollStyle, setNavScrollStyle] = useState(startPadding);
+    const [navScrollColor, setNavScrollColor] = useState(startNavBgColor);
+    const [textColor, setTextColor] = useState(startTextColor);
+    const [toggleButton, setToggleButton] = useState({});
 
-    // This hook will be executed after component render and again each time the url changes
-    useEffect(function update() {
+    // Will be executed once, on component mount
+    useEffect(() => {
+        animateNavBar();
+    }, []);
+
+    // Will be executed each time the url changes
+    useEffect(() => {
+        animateNavBar();
+    }, [pathName]);
+
+    function toggleNavbar() {
+        console.log(toggleButton);
+        if (toggleButton.classList.contains('show')) toggleButton.classList.remove('show');
+    }
+
+    function animateNavBar() {
+        // Get the height of the video or get 0
         let bgVideo = document.getElementById("video-bg") || null;
         let bgVideoHeight = bgVideo ? bgVideo.offsetHeight : 0;
-
+    
         setToggleButton(document.querySelector(".navbar-collapse, .collapse"));
-
+    
         console.log("BGVIDEOHEIGHT: ", bgVideoHeight);
         // Reset styles on url change
         if (bgVideoHeight === 0) {
@@ -38,7 +53,7 @@ function Navbar() {
             setNavScrollColor(startNavBgColor);
             setTextColor(startTextColor);
         }
-
+    
         // This function will be called every time the user scrolls
         function handleScroll() {
             bgVideo = document.getElementById("video-bg") || null;
@@ -47,9 +62,9 @@ function Navbar() {
             if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
                 setNavScrollStyle(endPadding);
             } else {
-                setNavScrollStyle(starPadding);
+                setNavScrollStyle(startPadding);
             }
-            
+    
             // Change navbar and text color (We want to change this only in the landing page, where the bgVideoHeight is bigger than 0)
             if (bgVideoHeight > 0) {
                 if (document.body.scrollTop > bgVideoHeight || document.documentElement.scrollTop > bgVideoHeight) {
@@ -62,19 +77,7 @@ function Navbar() {
             }
         }
         document.addEventListener('scroll', handleScroll);
-    }, [pathName]);
-
-   function toggleNavbar(){
-       console.log(toggleButton);
-        if (toggleButton.classList.contains('show')) toggleButton.classList.remove('show');
-   }
-
-    // To keep track of the url
-    useEffect(() => {
-        return history.listen((location) => {
-            setPathName(location.pathname);
-        })
-    }, [history])
+    }
 
     return (
         <>
@@ -118,6 +121,8 @@ function Navbar() {
         </>
     )
 }
+
+
 
 export default Navbar;
 
