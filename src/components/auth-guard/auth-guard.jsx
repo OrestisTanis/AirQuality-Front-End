@@ -22,11 +22,6 @@ function AuthGuard(props) {
         }
     }
 
-    // This function will run once on app start
-    useEffect(()=>{
-        setLoginStatusUsingJWT();
-    },[]);
-
     // This function will run everytime there is a change in the url
     useEffect(() => {
         return history.listen((location) => {

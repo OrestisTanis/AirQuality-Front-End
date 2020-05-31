@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import '../../shared/css/validation-errors.css';
 import useUserState from '../user-state';
+import {useHistory} from 'react-router-dom';
 
 function Login(){
     const starStyle = {
@@ -11,6 +12,7 @@ function Login(){
     const [userState, setUserState] = useUserState();
     // Private state used for error handling
     const [errors, setErrors]=useState({});
+    let history = useHistory();
 
     // Handler for the form submit event
     function handleLogin(event) {
@@ -54,6 +56,8 @@ function Login(){
             // Saving the token in client's local storage
             localStorage.setItem("token", res.data.token);
             setUserState(state => ({...state, isLoggedIn: true}));
+            history.goBack();
+            
         }).catch(error => {
             console.log(error);
             // Handle invalid credentials

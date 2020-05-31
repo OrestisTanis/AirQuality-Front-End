@@ -27,3 +27,7 @@ button.navbar-toggler:focus {
 .navbar-brand{
     padding-bottom: 0.5rem !important;
 }
+#sign-out-button {
+  text-decoration: none;
+}
+

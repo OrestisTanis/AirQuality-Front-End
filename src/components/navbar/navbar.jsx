@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import './navbar.css';
 import usePathNameState from '../pathname-state';
+import useUserState from '../user-state';
+import LogOut from '../logout/logout';
 
 
 function Navbar() {
@@ -14,12 +16,16 @@ function Navbar() {
     const endTextColor = { color: "black" };
 
     // Hooks
-    // const history = useHistory();
+    // For watching url changes
     const [pathName, setPathName] = usePathNameState();
+    // Used for navbar animations
     const [navScrollStyle, setNavScrollStyle] = useState(startPadding);
     const [navScrollColor, setNavScrollColor] = useState(startNavBgColor);
     const [textColor, setTextColor] = useState(startTextColor);
     const [toggleButton, setToggleButton] = useState({});
+    // The user's global state
+    const [userState, setUserState] = useUserState();
+    const history = useHistory();
 
     // Will be executed once, on component mount
     useEffect(() => {
@@ -32,7 +38,7 @@ function Navbar() {
     }, [pathName]);
 
     function toggleNavbar() {
-        console.log(toggleButton);
+        // console.log(toggleButton);
         if (toggleButton.classList.contains('show')) toggleButton.classList.remove('show');
     }
 
@@ -40,10 +46,10 @@ function Navbar() {
         // Get the height of the video or get 0
         let bgVideo = document.getElementById("video-bg") || null;
         let bgVideoHeight = bgVideo ? bgVideo.offsetHeight : 0;
-    
+
         setToggleButton(document.querySelector(".navbar-collapse, .collapse"));
-    
-        console.log("BGVIDEOHEIGHT: ", bgVideoHeight);
+
+        // console.log("BGVIDEOHEIGHT: ", bgVideoHeight);
         // Reset styles on url change
         if (bgVideoHeight === 0) {
             setNavScrollColor(endNavBgColor);
@@ -53,7 +59,7 @@ function Navbar() {
             setNavScrollColor(startNavBgColor);
             setTextColor(startTextColor);
         }
-    
+
         // This function will be called every time the user scrolls
         function handleScroll() {
             bgVideo = document.getElementById("video-bg") || null;
@@ -64,7 +70,7 @@ function Navbar() {
             } else {
                 setNavScrollStyle(startPadding);
             }
-    
+
             // Change navbar and text color (We want to change this only in the landing page, where the bgVideoHeight is bigger than 0)
             if (bgVideoHeight > 0) {
                 if (document.body.scrollTop > bgVideoHeight || document.documentElement.scrollTop > bgVideoHeight) {
@@ -77,6 +83,13 @@ function Navbar() {
             }
         }
         document.addEventListener('scroll', handleScroll);
+    }
+
+    // Gets called from the modal
+    function handleSignOut() {
+        localStorage.removeItem("token");
+        const path = "/";
+        history.push(path);
     }
 
     return (
@@ -108,14 +121,43 @@ function Navbar() {
                                 </li>
                             </ul>
                             {/* LOGIN, SIGN-UP BUTTONS  */}
-                            <div className="d-flex justify-content-center ml-md-auto">
-                                <button className="btn" type="button"><Link to="/login" className="nav-link" style={textColor} onClick={toggleNavbar}>Login</Link></button>
-                            </div>
-                            <div className="d-flex justify-content-center">
-                                <button className="btn" type="button"><Link to="/sign-up" className="nav-link" style={textColor} onClick={toggleNavbar}>Sign-up</Link></button>
-                            </div>
+                            {
+                                !userState.isLoggedIn ?
+                                    <><div className="d-flex justify-content-center ml-md-auto">
+                                        <button className="btn" type="button"><Link to="/login" className="nav-link" style={textColor} onClick={toggleNavbar}>Login</Link></button>
+                                    </div>
+                                        <div className="d-flex justify-content-center">
+                                            <button className="btn" type="button"><Link to="/sign-up" className="nav-link" style={textColor} onClick={toggleNavbar}>Sign-up</Link></button>
+                                        </div></>
+                                    :
+                                    <div className="d-flex justify-content-center ml-md-auto">
+                                        <button className="btn" type="button"><Link to="/" className="nav-link"  data-toggle="modal" data-target="#exampleModal" style={textColor} onClick={toggleNavbar}>Sign out</Link></button>
+                                    </div>
+                            }
+
                         </div>
                     </nav>
+                </div>
+            </div>
+
+            {/* Sign Out Modal */}
+            <div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">Signing Out</h5>
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div className="modal-body">
+                            <p>Are you sure you want to sign out?</p>
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="button" className="btn btn-primary" onClick={handleSignOut} data-dismiss="modal" id="sign-out-button" >Sign out</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </>
