@@ -30,4 +30,8 @@ button.navbar-toggler:focus {
 #sign-out-button {
   text-decoration: none;
 }
+.nav-link {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
 

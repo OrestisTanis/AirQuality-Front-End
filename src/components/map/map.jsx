@@ -8,11 +8,11 @@ function Map() {
     ]);
     const [zoomLvl, setZoomLvl] = useState(13);
     const position = [sensors[0].lat, sensors[0].lng];
-    const padTop = "0rem";
+    const padTop = "4.78rem";
 
     return (
         <div style={{paddingTop: padTop}}>
-            <LeafletMap center={position} zoom={zoomLvl} style={{ width: "100vw", height: `calc(100vh - ${padTop})`, zIndex:-10 }}>
+            <LeafletMap center={position} zoom={zoomLvl} style={{ width: "100vw", height: `calc(100vh - ${padTop})`, zIndex:5 }}>
                 <TileLayer
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
