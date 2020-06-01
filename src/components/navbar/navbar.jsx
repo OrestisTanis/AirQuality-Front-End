@@ -101,11 +101,11 @@ function Navbar() {
     }
 
     // Gets called from the modal
-    function handleSignOut() {
-        localStorage.removeItem("token");
-        const path = "/";
-        history.push(path);
-    }
+    // function handleSignOut() {
+    //     localStorage.removeItem("token");
+    //     const path = "/";
+    //     history.push(path);
+    // }
 
     // CHAT
     // useEffect(() => {
@@ -164,35 +164,16 @@ function Navbar() {
                                     </>
                                 :
                                     <div className="d-flex justify-content-center ml-md-auto">
-                                        <button className="btn nav-link" type="button"><Link to="/" data-toggle="modal" data-target="#exampleModal" style={textColor} onClick={toggleNavbar}>Sign out</Link></button>
+                                        <button className="btn nav-link" type="button"><Link to="/" data-toggle="modal" className="nav-link pt-1 pt-lg-0" data-target="#exampleModal" style={textColor} onClick={toggleNavbar}>Sign out</Link></button>
                                     </div>
                             }
                         </div>
                     </nav>
                 </div>
             </div>
-            {/* <div style={{height: '7rem'}}></div> */}
 
             {/* Sign Out Modal */}
-            <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-centered" role="document">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">Signing Out</h5>
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div className="modal-body">
-                            <p>Are you sure you want to sign out?</p>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="button" className="btn btn-primary" onClick={handleSignOut} data-dismiss="modal" id="sign-out-button" >Sign out</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <LogOut></LogOut>
         </>
     )
 }
