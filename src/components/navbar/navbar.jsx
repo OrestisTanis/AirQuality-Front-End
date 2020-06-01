@@ -114,6 +114,9 @@ function Navbar() {
                                     <Link to="/map" className="nav-link" style={textColor} onClick={toggleNavbar}>Map</Link>
                                 </li>
                                 <li className="nav-item">
+                                    <Link to="/sensor-registration" className="nav-link" style={textColor} onClick={toggleNavbar}>Senror registration</Link>
+                                </li>
+                                <li className="nav-item">
                                     <Link to="/products" className="nav-link" style={textColor} onClick={toggleNavbar}>Products</Link>
                                 </li>
                                 <li className="nav-item">
@@ -131,7 +134,7 @@ function Navbar() {
                                         </div></>
                                     :
                                     <div className="d-flex justify-content-center ml-md-auto">
-                                        <button className="btn" type="button"><Link to="/" className="nav-link"  data-toggle="modal" data-target="#exampleModal" style={textColor} onClick={toggleNavbar}>Sign out</Link></button>
+                                        <button className="btn" type="button"><Link to="/" className="nav-link" data-toggle="modal" data-target="#exampleModal" style={textColor} onClick={toggleNavbar}>Sign out</Link></button>
                                     </div>
                             }
                         </div>
