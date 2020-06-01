@@ -60,8 +60,10 @@ function Login(){
             
         }).catch(error => {
             console.log(error);
+            console.log(error.response.data)
             // Handle invalid credentials
             if (error.message){
+                console.log(error.message);
                 const errors = {};
                 errors.invalidCredentials = "Invalid username or password.";
                 setErrors(errors);

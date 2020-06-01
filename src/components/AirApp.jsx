@@ -11,6 +11,7 @@ import Company from './company/company';
 import ScrollToTop from './scrollToTop/scrollToTop';
 import AuthGuard from './auth-guard/auth-guard';
 import PathWatcher from './path-watcher/path-watcher';
+import ProductDetails from './products/product-details';
 import useUserState from './user-state';
 
 
@@ -28,9 +29,10 @@ function AirApp() {
 
             <Navbar></Navbar>
             <Route path="/map" component={Map} />
-            <Route path="/products" component={Products} />
+            <Route exact path="/products" component={Products} />
             <Route path="/company" component={Company} />
-            <Route exact={true} path="/" component={LandingPage} />
+            <Route exact path="/" component={LandingPage} />
+            <Route exact path="/products/:id" component={ProductDetails} />
             {console.log("isLoggedIn: ", userState.isLoggedIn)}
             {!userState.isLoggedIn &&  <Route path="/login" component={Login} />}
             {!userState.isLoggedIn &&  <Route path="/sign-up" component={SignUp} />}
