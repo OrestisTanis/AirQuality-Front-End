@@ -24,6 +24,12 @@ button.navbar-toggler:focus {
     outline: none;
     outline: none;
 }
+.navbar-toggler .line{
+    width: 100%;
+    float: left;
+    height: 0.18rem;
+    margin-bottom: 5px;
+}
 .navbar-brand{
     padding-bottom: 0.5rem !important;
 }

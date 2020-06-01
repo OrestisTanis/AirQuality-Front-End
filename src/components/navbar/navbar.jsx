@@ -14,75 +14,87 @@ function Navbar() {
     const endNavBgColor = { backgroundColor: "rgb(238, 238, 238)" };
     const startTextColor = { color: "white" };
     const endTextColor = { color: "black" };
+    const startHamIconBgColor = { backgroundColor: "rgb(255, 255, 255)" };
+    const endHamIconBgColor = { backgroundColor: "rgb(5, 5, 5)" };
 
     // Hooks
-    // For watching url changes
-    const [pathName, setPathName] = usePathNameState();
-    // Used for navbar animations
+    // For navbar state
     const [navScrollStyle, setNavScrollStyle] = useState(startPadding);
     const [navScrollColor, setNavScrollColor] = useState(startNavBgColor);
     const [textColor, setTextColor] = useState(startTextColor);
+    const [hamIconBgColor, setHamIconBgColor] = useState(startHamIconBgColor)
     const [toggleButton, setToggleButton] = useState({});
     // The user's global state
     const [userState, setUserState] = useUserState();
+    // For accessing history
     const history = useHistory();
 
-    // Will be executed once, on component mount
+    // Will be executed once in the app's lifetime, on component mount
     useEffect(() => {
-        animateNavBar();
+        setNavbarInitialState();
+        handleNavbarStateOnScroll();
     }, []);
 
     // Will be executed each time the url changes
     useEffect(() => {
-        animateNavBar();
-    }, [pathName]);
+        setNavbarInitialState();
+        handleNavbarStateOnScroll();
+    }, [history.location.pathname]);
 
     function toggleNavbar() {
-        // console.log(toggleButton);
         if (toggleButton.classList.contains('show')) toggleButton.classList.remove('show');
     }
 
-    function animateNavBar() {
-        // Get the height of the video or get 0
-        let bgVideo = document.getElementById("video-bg") || null;
-        let bgVideoHeight = bgVideo ? bgVideo.offsetHeight : 0;
-
+    function setNavbarInitialState() {
+        let pathname = history.location.pathname;
+        let windowWidth = window.innerWidth;
         setToggleButton(document.querySelector(".navbar-collapse, .collapse"));
 
-        // console.log("BGVIDEOHEIGHT: ", bgVideoHeight);
-        // Reset styles on url change
-        if (bgVideoHeight === 0) {
-            setNavScrollColor(endNavBgColor);
-            setTextColor(endTextColor);
+        // Check if we are in home page and mobile
+        if (pathname === "/" && windowWidth < 768) {
+            setNavBarState({ navColor: startNavBgColor, textColor: startTextColor, hamIconBgColor: startHamIconBgColor });
         }
-        else {
-            setNavScrollColor(startNavBgColor);
-            setTextColor(startTextColor);
+        // Check if we are in home page and a tablet/pc
+        if (pathname === "/" && windowWidth >= 768) {
+            setNavBarState({ navColor: startNavBgColor, textColor: startTextColor, hamIconBgColor: startHamIconBgColor });
         }
+        // Check if we are in another page rather than the homepage, then we dont want animations
+        if (pathname !== "/") {
+            setNavBarState({ navColor: endNavBgColor, textColor: endTextColor, hamIconBgColor: endHamIconBgColor });
+        }
+    }
 
-        // This function will be called every time the user scrolls
-        function handleScroll() {
-            bgVideo = document.getElementById("video-bg") || null;
-            bgVideoHeight = bgVideo ? bgVideo.offsetHeight : 0;
-            // Change padding
-            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-                setNavScrollStyle(endPadding);
-            } else {
-                setNavScrollStyle(startPadding);
-            }
+    function setNavBarState(obj) {
+        setNavScrollColor(obj.navColor);
+        setTextColor(obj.textColor);
+        setHamIconBgColor(obj.hamIconBgColor);
+    }
 
-            // Change navbar and text color (We want to change this only in the landing page, where the bgVideoHeight is bigger than 0)
-            if (bgVideoHeight > 0) {
-                if (document.body.scrollTop > bgVideoHeight || document.documentElement.scrollTop > bgVideoHeight) {
-                    setNavScrollColor(endNavBgColor);
-                    setTextColor(endTextColor);
+    function handleNavbarStateOnScroll() {
+        function handleNavColorsOnScroll() {
+            let pathname = history.location.pathname;
+            let windowWidth = window.innerWidth;
+            let scrollHeightTrigger = 0;
+            
+            if (pathname === "/" && windowWidth < 768) scrollHeightTrigger = document.getElementById("image-poster").offsetHeight;
+            if (pathname === "/" && windowWidth >= 768) scrollHeightTrigger = document.getElementById("video-bg").offsetHeight;
+            if (pathname !== "/") setNavBarState({ navColor: endNavBgColor, textColor: endTextColor, hamIconBgColor: endHamIconBgColor });
+
+            // Change navbar colors on scroll, only in the landing page)
+            if (pathname === "/" ) {
+                if (document.body.scrollTop > scrollHeightTrigger || document.documentElement.scrollTop > scrollHeightTrigger) {
+                    setNavBarState({ navColor: endNavBgColor, textColor: endTextColor, hamIconBgColor: endHamIconBgColor });
                 } else {
-                    setNavScrollColor(startNavBgColor);
-                    setTextColor(startTextColor);
+                    setNavBarState({ navColor: startNavBgColor, textColor: startTextColor, hamIconBgColor: startHamIconBgColor });
                 }
             }
         }
-        document.addEventListener('scroll', handleScroll);
+        function handlePaddingOnScroll(){
+             // Change padding on scroll for all pages
+             if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) setNavScrollStyle(endPadding);
+             else setNavScrollStyle(startPadding);
+        }
+        document.addEventListener('scroll', handleNavColorsOnScroll, handlePaddingOnScroll);
     }
 
     // Gets called from the modal
@@ -111,13 +123,16 @@ function Navbar() {
                     <nav className="navbar navbar-expand-lg navbar-light" style={navScrollStyle}>
                         {/* BRAND NAME  */}
                         <div className="pl-2"><Link to="/" className="navbar-brand"><h4 style={textColor} onClick={toggleNavbar}>AirSense</h4></Link></div>
-                        <button className="navbar-toggler" type="button" data-toggle="collapse"
+                        <button className="navbar-toggler pt-2" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                             aria-label="Toggle navigation">
-                            <span className="navbar-toggler-icon"></span>
+                            {/* <span className="navbar-toggler-icon"></span> */}
+                            <span className="line" style={hamIconBgColor}>&nbsp;&nbsp;</span>
+                            <span className="line" style={hamIconBgColor}>&nbsp;&nbsp;</span>
+                            <span className="line" style={hamIconBgColor}>&nbsp;&nbsp;</span>
                         </button>
 
-                       
+
 
                         {/* LINKS, LOGIN, SIGN-UP BUTTONS  */}
                         <div className="collapse navbar-collapse" id="navbarSupportedContent" >
