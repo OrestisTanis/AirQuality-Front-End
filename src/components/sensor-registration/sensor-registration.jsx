@@ -11,17 +11,10 @@ L.Icon.Default.mergeOptions({
 });
 
 function SensorRegistration() {
-    const [sensors, setSensors] = useState([
-        { lat: 51.505, lng: -0.09 }
-    ]);
-    const [zoomLvl, setZoomLvl] = useState(10);
-    // const [position, setPosition] = useState([sensors[0].lat, sensors[0].lng]);
-    const [markerPosition, setMarkerPosition] = useState([sensors[0].lat, sensors[0].lng]);
-    // const padTop = "4.78rem";
 
+    const [zoomLvl, setZoomLvl] = useState(10);
+    const [markerPosition, setMarkerPosition] = useState([37.968713, 23.729195]);
     const [userPosition, setUserPosition] = useState([37.968713, 23.729195])
-    // const position = [sensors[0].lat, sensors[0].lng];
-    // let userPosition = [15.968442, 15.729676];
 
     navigator.geolocation.getCurrentPosition(function (position) {
         setUserPosition([position.coords.latitude, position.coords.longitude]);
