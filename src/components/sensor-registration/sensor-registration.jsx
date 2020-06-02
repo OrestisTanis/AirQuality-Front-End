@@ -14,22 +14,28 @@ function SensorRegistration() {
     const [sensors, setSensors] = useState([
         { lat: 51.505, lng: -0.09 }
     ]);
-    const [zoomLvl, setZoomLvl] = useState(13);
+    const [zoomLvl, setZoomLvl] = useState(16);
     const [position, setPosition] = useState([sensors[0].lat, sensors[0].lng]);
     const [markerPosition, setMarkerPosition] = useState([sensors[0].lat, sensors[0].lng]);
     const padTop = "4.78rem";
+
+    const [userPosition, setUserPosition] = useState([15.968442, 15.729676])
+    // const position = [sensors[0].lat, sensors[0].lng];
+    // let userPosition = [15.968442, 15.729676];
+    
+    navigator.geolocation.getCurrentPosition(function (position) {
+        setUserPosition([position.coords.latitude, position.coords.longitude]);
+        console.log(userPosition)
+    });
 
     function handleClick(e) {
         console.log(e.latlng);
         return setMarkerPosition(e.latlng);
     }
-    // navigator.geolocation.getCurrentPosition(function (position) {
-    //     console.log(position)
-    // });
 
     return (
         <div style={{ paddingTop: padTop }}>
-            <LeafletMap onClick={handleClick} center={position} zoom={zoomLvl} style={{ width: "100vw", height: `calc(100vh - ${padTop})`, zIndex: 5 }}>
+            <LeafletMap onClick={handleClick} center={userPosition} zoom={zoomLvl} style={{ width: "100vw", height: `calc(100vh - ${padTop})`, zIndex: 5 }}>
                 <TileLayer
                     attribution='Maps &nbsp;&copy;'
                     url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'

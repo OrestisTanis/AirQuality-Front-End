@@ -10,9 +10,15 @@ function Map() {
     const [sensors, setSensors] = useState([
         { lat: 37.968442, lng: 23.729676 }
     ]);
-    const [zoomLvl, setZoomLvl] = useState(12);
-    const position = [sensors[0].lat, sensors[0].lng];
+    const [zoomLvl, setZoomLvl] = useState(10);
+    const [userPosition, setUserPosition] = useState([15.968442, 15.729676])
+    // const position = [sensors[0].lat, sensors[0].lng];
     const padTop = "4.78rem";
+    // let userPosition = [15.968442, 15.729676];
+    navigator.geolocation.getCurrentPosition(function (position) {
+        setUserPosition([position.coords.latitude, position.coords.longitude]);
+        console.log(userPosition)
+    });
 
     delete L.Icon.Default.prototype._getIconUrl;
     L.Icon.Default.mergeOptions({
@@ -22,7 +28,7 @@ function Map() {
     });
     return (
         <div style={{ paddingTop: padTop }}>
-            <LeafletMap center={position} zoom={zoomLvl} style={{ width: "100vw", height: `calc(100vh - ${padTop})`, zIndex: 5 }}>
+            <LeafletMap center={userPosition} zoom={zoomLvl} style={{ width: "100vw", height: `calc(100vh - ${padTop})`, zIndex: 5 }}>
                 <TileLayer
                     attribution='Maps &nbsp;&copy;'
                     url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
