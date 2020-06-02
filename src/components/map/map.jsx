@@ -11,7 +11,7 @@ function Map() {
         { lat: 37.968442, lng: 23.729676 }
     ]);
     const [zoomLvl, setZoomLvl] = useState(10);
-    const [userPosition, setUserPosition] = useState([15.968442, 15.729676])
+    const [userPosition, setUserPosition] = useState([37.968713, 23.729195])
     // const position = [sensors[0].lat, sensors[0].lng];
     const padTop = "4.78rem";
     // let userPosition = [15.968442, 15.729676];
