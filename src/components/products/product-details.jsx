@@ -11,6 +11,7 @@ export default function ProductDetails() {
     const [errors, setErrors] = useState({});
     const [descSentencesArr, setDescSentencesArr] = useState([]);
     const [firstSentence, setFirstSentence] = useState("");
+    const [techDetailsArr, setTechDetailsArr] = useState([]);
 
     // Will run once after component load
     useEffect(() => {
@@ -24,8 +25,10 @@ export default function ProductDetails() {
                 // Handle successful fetch of data
                 setProduct(res.data);
                 const descSentenceArr = res.data.description.split(";");
+                const techDetailsArr = res.data.technicalDetails.split(";");
                 setDescSentencesArr(descSentenceArr);
                 setFirstSentence(descSentenceArr[0].split('.')[0]);
+                setTechDetailsArr(techDetailsArr);
             }).catch(error => {
                 console.log(error);
                 // Handle errors
@@ -49,7 +52,7 @@ export default function ProductDetails() {
                             <div className="col-12 p-5">
                                 <h5>{product.name}</h5>
                                 <div className="border mt-4 mb-4" id='product-details-line'></div>
-                                <p style={{maxWidth: "22rem"}}> {firstSentence}. </p>
+                                <p style={{ maxWidth: "22rem" }}> {firstSentence}. </p>
                             </div>
                         </div>
                     </div>
@@ -94,12 +97,26 @@ export default function ProductDetails() {
 
             {/* Description */}
             <div className="container-fluid shadow pl-md-5 pr-md-5">
-                <div className="row bg-white mt-5 pt-5 d-flex justify-content-center" style={{ bgColor: 'white'}}>
-                    <div className="col-10 pb-5 mb-5 mt-1" style={{maxWidth:"68rem"}}>
+                <div className="row bg-white mt-5 pt-5 d-flex justify-content-center" style={{ bgColor: 'white' }}>
+                    <div className="col-10 pb-5 mb-5 mt-1" style={{ maxWidth: "68rem" }}>
                         <h4 className="mb-4">Description</h4>
                         {descSentencesArr.map((sentence, index) => {
-                            return index%2===0?<><p>{sentence}</p><br></br></> : <p>{sentence}</p>;
+                            return index % 2 === 0 ? <><p>{sentence}</p><br></br></> : <p>{sentence}</p>;
                         })}
+                    </div>
+                </div>
+            </div>
+
+            {/* Techical Details */}
+            <div className="container-fluid shadow pl-md-5 pr-md-5">
+                <div className="row bg-white mt-5 pt-5 d-flex justify-content-center" style={{ bgColor: 'white' }}>
+                    <div className="col-10 pb-5 mb-5 mt-1" style={{ maxWidth: "68rem" }}>
+                        <h4 className="mb-4">Technical Details</h4>
+                        <ul>
+                            {techDetailsArr.map((sentence, index) => {
+                                return index < techDetailsArr.length - 1 ? <li className="mb-1">{sentence}</li> : null
+                            })}
+                        </ul>
                     </div>
                 </div>
             </div>
