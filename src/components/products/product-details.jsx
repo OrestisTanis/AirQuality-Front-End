@@ -9,7 +9,7 @@ import './product-details.css';
 export default function ProductDetails() {
     const { pathname } = useLocation();
     const history = useHistory()
-    const [product, setProduct] = useState();
+    const [product, setProduct] = useState({});
     const [errors, setErrors] = useState({});
     const [descSentencesArr, setDescSentencesArr] = useState([]);
     const [firstSentence, setFirstSentence] = useState("");
@@ -61,7 +61,7 @@ export default function ProductDetails() {
     }
 
     return (<>
-        {Object.keys(errors).length || !product ? <Error errors={errors}/> :
+        {Object.keys(errors).length ? <Error errors={errors}/> :
 
             <div style={{ paddingTop: "10rem" }}>
                 <div className="container pl-5 pr-5 pr-sm-0 pl-sm-0 pl-md-5 pr-md-5">
