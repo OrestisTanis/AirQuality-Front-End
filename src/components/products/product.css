@@ -1,5 +1,5 @@
 .product-title {
-    font-size:0.9rem;
+    font-size:1.1rem;
 }
 .product-price {
     font-weight: bold;
@@ -16,7 +16,7 @@
 }
 .product-image {
     object-fit:cover;
-    width: 14rem;
-    height: auto;
+    width: auto;
+    height: 15rem;
     margin: auto;
 }

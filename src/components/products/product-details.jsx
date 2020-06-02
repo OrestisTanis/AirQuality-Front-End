@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation, useHistory, Link } from "react-router-dom";
 import React from 'react';
 import axios from 'axios';
 import './product-details.css';
@@ -23,9 +23,10 @@ export default function ProductDetails() {
         axios.get(`http://localhost:8080${pathname}`)
             .then(res => {
                 // Handle successful fetch of data
+                const resData = res.data;
                 setProduct(res.data);
-                const descSentenceArr = res.data.description.split(";");
-                const techDetailsArr = res.data.technicalDetails.split(";");
+                const descSentenceArr = resData.description.split(";");
+                const techDetailsArr = resData.technicalDetails.split(";");
                 setDescSentencesArr(descSentenceArr);
                 setFirstSentence(descSentenceArr[0].split('.')[0]);
                 setTechDetailsArr(techDetailsArr);
@@ -44,7 +45,7 @@ export default function ProductDetails() {
         <div style={{ paddingTop: "10rem" }}>
             <div className="container pl-5 pr-5 pr-sm-0 pl-sm-0 pl-md-5 pr-md-5">
                 <div className="row">
-                    <div className="col-12 col-sm-6 offset-md-1 col-lg-6">
+                    <div className="col-12 col-sm-6  col-lg-6">
                         <div className="row">
                             <div className="col-12 d-flex justify-content-center d-lg-block">
                                 <img id="product-details-image" className="img-responsive shadow" src={product.imageUrl} alt="product image" />
@@ -57,7 +58,7 @@ export default function ProductDetails() {
                         </div>
                     </div>
                     {/* In stock, cart, quantity buttons */}
-                    <div className="col-12 col-sm-6 col-md-5 pr-0 pl-0">
+                    <div className="col-12 col-sm-6 pr-0 pl-0">
                         <div className="shadow">
                             <div className="col-12 w-100 pt-3 pb-3 ml-0 mr-0 text-center text-white" id="stock">
                                 <p>IN STOCK</p>
@@ -95,22 +96,21 @@ export default function ProductDetails() {
                 </div>
             </div>
 
-            {/* Description */}
-            <div className="container-fluid shadow pl-md-5 pr-md-5">
-                <div className="row bg-white mt-5 pt-5 d-flex justify-content-center" style={{ bgColor: 'white' }}>
-                    <div className="col-10 pb-5 mb-5 mt-1" style={{ maxWidth: "68rem" }}>
+            
+            <div className="container-fluid shadow pl-md-5 pr-md-5 mt-5">
+                {/* Description */}
+                <div className="row bg-white pt-5 d-flex justify-content-center" style={{ bgColor: 'white' }}>
+                    <div className="col-10 mb-5 mt-1" style={{ maxWidth: "68rem" }}>
                         <h4 className="mb-4">Description</h4>
                         {descSentencesArr.map((sentence, index) => {
                             return index % 2 === 0 ? <><p>{sentence}</p><br></br></> : <p>{sentence}</p>;
                         })}
                     </div>
                 </div>
-            </div>
 
-            {/* Techical Details */}
-            <div className="container-fluid shadow pl-md-5 pr-md-5">
-                <div className="row bg-white mt-5 pt-5 d-flex justify-content-center" style={{ bgColor: 'white' }}>
-                    <div className="col-10 pb-5 mb-5 mt-1" style={{ maxWidth: "68rem" }}>
+                 {/* Techical Details */}
+                <div className="row bg-white d-flex justify-content-center" style={{ bgColor: 'white' }}>
+                    <div className="col-10 pb-4" style={{ maxWidth: "68rem" }}>
                         <h4 className="mb-4">Technical Details</h4>
                         <ul>
                             {techDetailsArr.map((sentence, index) => {
@@ -118,13 +118,11 @@ export default function ProductDetails() {
                             })}
                         </ul>
                     </div>
+                    <div className="col-10 text-center">
+                        <Link className="mb-5 mt-5 btn btn-primary" to={product.manualUrl}>View sensor manual</Link>
+                    </div>
                 </div>
             </div>
-
-
         </div>
-
-
-
     </>);
 }

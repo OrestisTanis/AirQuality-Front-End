@@ -42,7 +42,7 @@ function Products() {
                 <div className="row mt-5 mb-5 d-flex justify-content-center p-3 p-sm-1 p-md-1">
                     { productData.map(product => {
                         return <Product key={product.id} product={product}/>
-                    })};
+                    })}
                 </div>
             </div>
         </>
