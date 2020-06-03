@@ -18,10 +18,10 @@ export default function ProductDetails() {
     const [selectedQuan, setSelectedQuan] = useState(0);
     const [isFirstRender, setIsFirstRender] = useState(true);
     const username = userState.username;
-    const [cartItem, setCartItem] = useState({ product: { id: 0 }, quantity: 0 });
-    
+    const [cartItem, setCartItem] = useState({ product: { id: 0, name: '', price: '', imageUrl: '' }, quantity: 0 });
 
-    function setCartItemId(newId){
+
+    function setCartItemId(newId) {
         cartItem = { product: { id: newId }, quantity: 0 };
     }
 
@@ -45,7 +45,7 @@ export default function ProductDetails() {
                 setTechDetailsArr(techDetailsArr);
                 setCartItem({ product: { id: resData.id }, quantity: 0 });
                 setInitialQuantityById(resData.id);
-                
+
             }).catch(error => {
                 // Handle errors
                 const errors = {};
@@ -63,25 +63,24 @@ export default function ProductDetails() {
             })
     }
 
-    function setInitialQuantityById(id){
+    function setInitialQuantityById(id) {
         let storageCart = localStorage.getItem('cart');
-            // Existent cart in local storage
-            if (storageCart){
-                let storageCart = JSON.parse(localStorage.getItem('cart'));
-                let storageCartItems = storageCart.cartItems;
-                storageCartItems.forEach(storageCartItem => {
-                    // Item already added in cart
-                    if (storageCartItem.product.id === id){
-                        console.log("HEY", storageCartItem.quantity);
-                        setSelectedQuan(storageCartItem.quantity)
-                    }
-                });
-            } 
+        // Existent cart in local storage
+        if (storageCart) {
+            let storageCart = JSON.parse(localStorage.getItem('cart'));
+            let storageCartItems = storageCart.cartItems;
+            storageCartItems.forEach(storageCartItem => {
+                // Item already added in cart
+                if (storageCartItem.product.id === id) {
+                    setSelectedQuan(storageCartItem.quantity)
+                }
+            });
+        }
     }
 
     function addQuantity() {
         let oldQuan = selectedQuan;
-        console.log("CARTITEM FROM ADDQUAN",cartItem);
+        console.log("CARTITEM FROM ADDQUAN", cartItem);
         //cartItem.product.quantity = selectedQuan;
         setSelectedQuan(++oldQuan);
     }
@@ -117,6 +116,9 @@ export default function ProductDetails() {
                 // Item already added in cart
                 if (storageCartItem.product.id === product.id) {
                     storageCartItem.quantity = selectedQuan;
+                    storageCartItem.imageUrl = product.imageUrl;
+                    storageCartItem.price = product.price;
+                    storageCartItem.name = product.name;
                     itemFound = true;
                     if (selectedQuan === 0) {
                         let index = storageCartItems.indexOf(storageCartItem);
@@ -127,6 +129,9 @@ export default function ProductDetails() {
             // Item not already added in cart, adding it now
             if (!itemFound) {
                 cartItem.quantity = selectedQuan;
+                cartItem.imageUrl = product.imageUrl;
+                cartItem.price = product.price;
+                cartItem.name = product.name;
                 storageCartItems.push(cartItem);
             }
             let updatedCart = JSON.stringify(storageCart);
@@ -140,6 +145,9 @@ export default function ProductDetails() {
         function createNewCartAndSave() {
             let newCart = { cartItems: [] };
             cartItem.quantity = selectedQuan;
+            cartItem.imageUrl = product.imageUrl;
+            cartItem.price = product.price;
+            cartItem.name = product.name;
             newCart.cartItems.push(cartItem);
             localStorage.setItem('cart', JSON.stringify(newCart));
         }
@@ -190,16 +198,16 @@ export default function ProductDetails() {
                                             </div> */}
                                             <div className="col-12 pt-3 pb-3 border-bottom border-right border-left d-flex align-items-center justify-content-center">
                                                 {selectedQuan === 0 ? <button className="btn" id="product-details-add-to-cart-button" onClick={addQuantity}> Add To Cart </button>
-                                                    :<>
-                                                    <div className="col-4">
-                                                        <button className="btn"><p className="fontsize-2" id="product-details-plus-button" onClick={addQuantity}>+</p></button>
-                                                    </div>
-                                                    <div className="col-4">
-                                                        <p className="fontsize-2" id="product-details-quantity">{selectedQuan}</p>
-                                                    </div>
-                                                    <div className="col-4">
-                                                        <button className="btn"><p className="fontsize-2" id="product-details-plus-button" onClick={deductQuantity}>-</p></button>
-                                                    </div></>
+                                                    : <>
+                                                        <div className="col-4">
+                                                            <button className="btn"><p className="fontsize-2" id="product-details-plus-button" onClick={addQuantity}>+</p></button>
+                                                        </div>
+                                                        <div className="col-4">
+                                                            <p className="fontsize-2" id="product-details-quantity">{selectedQuan}</p>
+                                                        </div>
+                                                        <div className="col-4">
+                                                            <button className="btn"><p className="fontsize-2" id="product-details-plus-button" onClick={deductQuantity}>-</p></button>
+                                                        </div></>
                                                 }
                                             </div>
                                             <div className="col-12 pt-3 pb-3 border-bottom border-right border-left">

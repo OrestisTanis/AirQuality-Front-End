@@ -164,6 +164,7 @@ function Navbar() {
                                     </>
                                 :
                                     <div className="d-flex justify-content-center ml-md-auto">
+                                        <button className="btn nav-link" type="button"><Link to="/cart" className="nav-link pt-1 pt-lg-0" style={textColor} onClick={toggleNavbar}>Cart</Link></button>
                                         <button className="btn nav-link" type="button"><Link to="/" data-toggle="modal" className="nav-link pt-1 pt-lg-0" data-target="#exampleModal" style={textColor} onClick={toggleNavbar}>Sign out</Link></button>
                                     </div>
                             }

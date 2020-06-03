@@ -10,7 +10,7 @@ function Product(props) {
     const [selectedQuan, setSelectedQuan] = useState(0);
     const [isFirstRender, setIsFirstRender] = useState(true);
     const username = userState.username;
-    let cartItem = { product: { id: product.id }, quantity: 0 };
+    const [cartItem, setCartItem] = useState({ product: { id: 0, name: '', price: '', imageUrl: '' }, quantity: 0 });
 
     function addQuantity() {
         let oldQuan = selectedQuan;
@@ -28,15 +28,16 @@ function Product(props) {
     useEffect(() => {
         console.log("USEEFFECT is First Render: " + isFirstRender);
         if (isFirstRender === true) {
-            setInitialQuantityById(product.id)
+            setInitialQuantity(product)
             setIsFirstRender(false);
+            cartItem.product.id = product.id;
         }
 
-        if (isFirstRender === false) saveCartToLocalStorage();
+        if (isFirstRender === false) saveCartToLocalStorage(product);
 
     }, [selectedQuan]);
 
-    function setInitialQuantityById(id) {
+    function setInitialQuantity(product) {
         let storageCart = localStorage.getItem('cart');
         // Existent cart in local storage
         if (storageCart) {
@@ -44,14 +45,14 @@ function Product(props) {
             let storageCartItems = storageCart.cartItems;
             storageCartItems.forEach(storageCartItem => {
                 // Item already added in cart
-                if (storageCartItem.product.id === id) {
+                if (storageCartItem.product.id === product.id) {
                     setSelectedQuan(storageCartItem.quantity)
                 }
             });
         }
     }
 
-    function saveCartToLocalStorage() {
+    function saveCartToLocalStorage(product) {
         let storageCart = localStorage.getItem('cart');
 
         // Existent cart in local storage
@@ -73,6 +74,9 @@ function Product(props) {
             // Item not already added in cart, adding it now
             if (!itemFound) {
                 cartItem.quantity = selectedQuan;
+                cartItem.product.price = product.price;
+                cartItem.product.name = product.name;
+                cartItem.product.imageUrl = product.imageUrl;
                 storageCartItems.push(cartItem);
             }
             let updatedCart = JSON.stringify(storageCart);
@@ -80,12 +84,16 @@ function Product(props) {
         }
         // No cart in local storage
         else {
-            createNewCartAndSave();
+            createNewCartAndSave(product);
         }
 
-        function createNewCartAndSave() {
+        function createNewCartAndSave(product) {
             let newCart = { cartItems: [] };
-            cartItem.quantity = selectedQuan;
+            cartItem.product.quantity = selectedQuan;
+            cartItem.product.price = product.price;
+            cartItem.product.name = product.name;
+            cartItem.product.imageUrl = product.imageUrl;
+            console.log(cartItem);
             newCart.cartItems.push(cartItem);
             localStorage.setItem('cart', JSON.stringify(newCart));
         }
