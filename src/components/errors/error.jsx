@@ -21,16 +21,6 @@ function Error(props) {
             </div>
 
         </div>
-
-        // <div id="errorImg-container" className="container pl-5 pr-5  mb-0 pb-0 text-center" style={{ paddingTop: '10rem', minHeight: '100vh' }}>
-        //     <div className="row mb-0 pb-0">
-        //         <div className="col-12">
-        //             <h2>ERROR#404</h2>
-        //             <h4>... carbon dioxide passed critical threshold</h4>
-        //         </div>
-        //     </div>
-        //     <img id="errorImg" src={errorImg} alt="error image" />
-        // </div>
     )
 }
 

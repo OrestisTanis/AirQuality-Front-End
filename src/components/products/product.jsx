@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function Product(props) {
     const product = props.product;
-    console.log(product.imageUrl);
+   
     return (
 
         <>

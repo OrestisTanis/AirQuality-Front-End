@@ -51,16 +51,12 @@ function Login() {
         })
             .then(res => {
                 // Handle successful login
-                console.log(res);
-                console.log(res.data);
                 // Saving the token in client's local storage
                 localStorage.setItem("token", res.data.token);
                 setUserState(state => ({ ...state, isLoggedIn: true }));
                 history.goBack();
 
             }).catch(error => {
-                console.log(error);
-                console.log(error.response.data)
                 // Handle invalid credentials
                 if (error.message) {
                     console.log(error.message);

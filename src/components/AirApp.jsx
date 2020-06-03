@@ -21,7 +21,8 @@ function AirApp() {
     return (
         <>  
             {/* Listens for url changes and provides globally the current parth */}
-            {/* <PathWatcher/> */}
+            {/* <PathWatcher/> <- Propably going to be deleted, we dont need it anymore */}
+
             {/* Scrolls to top of the page when url changes */}
             <ScrollToTop/>
             {/* Checks for JWT validity on URL change and sets the user state accordingly */}
