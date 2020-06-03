@@ -7,11 +7,14 @@ import BackgroundVideo from './background-video';
 
 function LandingPage() {
     return (
-        <>  
+        <>
             <BackgroundVideo></BackgroundVideo>
-            <div className="container-fluid">
+            <div className="container-fluid" id="feature-div">
                 <div className="container">
                     <div className="row text-center mt-5 mb-5">
+                        <div className="col-12">
+                            <h2 className="mt-5 mb-5">Accurate local air quality and visualized data</h2>
+                        </div>
                         <MainFeature className="col-12 col-md-4 mt-5 mb-5" />
                         <MainFeature className="col-12 col-md-4 mt-5 mb-5" />
                         <MainFeature className="col-12 col-md-4 mt-5 mb-5" />

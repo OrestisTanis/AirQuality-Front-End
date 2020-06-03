@@ -44,3 +44,14 @@ body {
     object-fit:cover; 
     object-position:40% 50%;
 } 
+#image-down-button{
+    position:absolute;
+    transform: translate(-50%, -50%);
+    top:92%;
+    left: 50%;
+    width: 2rem;
+    height: 2rem;
+}
+#image-down-button:hover{
+    cursor:pointer;
+}
