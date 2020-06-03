@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import isJWTExpiredOrNull from './validate-jwt';
+import isJWTExpiredOrNull, {getUsernameFromJWT} from './validate-jwt';
 
 let listeners = [];
 let state = { 
-  isLoggedIn: !isJWTExpiredOrNull(localStorage.token)
+  isLoggedIn: !isJWTExpiredOrNull(localStorage.token),
+  username: getUsernameFromJWT(localStorage.token)
  };
 
 const setState = (newState) => {

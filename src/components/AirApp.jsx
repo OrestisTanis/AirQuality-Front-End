@@ -13,10 +13,11 @@ import AuthGuard from './auth-guard/auth-guard';
 import PathWatcher from './path-watcher/path-watcher';
 import ProductDetails from './products/product-details';
 import useUserState from './user-state';
+import Cart from './cart/cart';
 
 
 function AirApp() {
-    const [userState, setuserState] = useUserState();
+    const [userState, setUserState] = useUserState();
 
     return (
         <>  
@@ -34,6 +35,7 @@ function AirApp() {
             <Route path="/company" component={Company} />
             <Route exact path="/" component={LandingPage} />
             <Route exact path="/products/:id" component={ProductDetails} />
+            <Route exact path="/cart" component={Cart} />
             {console.log("isLoggedIn: ", userState.isLoggedIn)}
             {!userState.isLoggedIn &&  <Route path="/login" component={Login} />}
             {!userState.isLoggedIn &&  <Route path="/sign-up" component={SignUp} />}

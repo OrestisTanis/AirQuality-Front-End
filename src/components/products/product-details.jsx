@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useHistory, Link } from "react-router-dom";
 import Error from '../errors/error';
-
 import React from 'react';
 import axios from 'axios';
 import './product-details.css';
@@ -14,7 +13,7 @@ export default function ProductDetails() {
     const [descSentencesArr, setDescSentencesArr] = useState([]);
     const [firstSentence, setFirstSentence] = useState("");
     const [techDetailsArr, setTechDetailsArr] = useState([]);
-
+    const [quantity, setQuantity] = useState(0);
 
     // Will run once after component load
     useEffect(() => {
@@ -27,6 +26,7 @@ export default function ProductDetails() {
             .then(res => {
                 // Handle successful fetch of data
                 const resData = res.data;
+                console.log(resData);
                 const descSentenceArr = resData.description.split(";");
                 const techDetailsArr = resData.technicalDetails.split(";");
                 setProduct(resData);
@@ -89,18 +89,18 @@ export default function ProductDetails() {
                                         <div className="col-12 pt-3 pb-3 border-bottom border-right border-left pl-4 pr-3">
                                             <div className="row d-flex align-items-center">
                                                 <div className="col-4">
-                                                    <button className="btn"><p className="fontsize-2">+</p></button>
+                                                    <button className="btn"><p className="fontsize-2" id="product-details-plus-button">+</p></button>
                                                 </div>
                                                 <div className="col-4">
-                                                    <p className="fontsize-2">1</p>
+                                                    <p className="fontsize-2" id="product-details-quantity">0</p>
                                                 </div>
                                                 <div className="col-4">
-                                                    <button className="btn"><p className="fontsize-2">-</p></button>
+                                                    <button className="btn"><p className="fontsize-2" id="product-details-plus-button">-</p></button>
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="col-12 pt-3 pb-3 border-bottom border-right border-left">
-                                            Add To Cart
+                                            <button className="btn" id="product-details-add-to-cart-button">  Add To Cart </button>
                                          </div>
                                         <div className="col-12 pt-3 pb-3 border-bottom border-right border-left">
                                             <span className="bold">FREE SHIPPING</span> for order over &euro;350

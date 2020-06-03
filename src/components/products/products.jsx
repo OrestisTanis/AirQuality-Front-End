@@ -1,14 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import Product from './product';
 import axios from 'axios';
+// import useUserState from '../user-state';
 
 function Products() {
     const [productData, setProductData] = useState([]);
     const [errors, setErrors] = useState({});
+    // const [userState, setUserState] = useUserState();
 
     // Will run once after component load
     useEffect(() => {
         getProductData();
+        // console.log(userState.username);
     }, []);
 
     function getProductData(){
