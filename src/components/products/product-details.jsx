@@ -116,9 +116,9 @@ export default function ProductDetails() {
                 // Item already added in cart
                 if (storageCartItem.product.id === product.id) {
                     storageCartItem.quantity = selectedQuan;
-                    storageCartItem.imageUrl = product.imageUrl;
-                    storageCartItem.price = product.price;
-                    storageCartItem.name = product.name;
+                    storageCartItem.product.imageUrl = product.imageUrl;
+                    storageCartItem.product.price = product.price;
+                    storageCartItem.product.name = product.name;
                     itemFound = true;
                     if (selectedQuan === 0) {
                         let index = storageCartItems.indexOf(storageCartItem);
@@ -129,9 +129,9 @@ export default function ProductDetails() {
             // Item not already added in cart, adding it now
             if (!itemFound) {
                 cartItem.quantity = selectedQuan;
-                cartItem.imageUrl = product.imageUrl;
-                cartItem.price = product.price;
-                cartItem.name = product.name;
+                cartItem.product.imageUrl = product.imageUrl;
+                cartItem.product.price = product.price;
+                cartItem.product.name = product.name;
                 storageCartItems.push(cartItem);
             }
             let updatedCart = JSON.stringify(storageCart);
@@ -145,9 +145,9 @@ export default function ProductDetails() {
         function createNewCartAndSave() {
             let newCart = { cartItems: [] };
             cartItem.quantity = selectedQuan;
-            cartItem.imageUrl = product.imageUrl;
-            cartItem.price = product.price;
-            cartItem.name = product.name;
+            cartItem.product.imageUrl = product.imageUrl;
+            cartItem.product.price = product.price;
+            cartItem.product.name = product.name;
             newCart.cartItems.push(cartItem);
             localStorage.setItem('cart', JSON.stringify(newCart));
         }

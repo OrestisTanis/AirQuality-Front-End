@@ -26,7 +26,6 @@ function Product(props) {
 
     // Will run once after component load
     useEffect(() => {
-        console.log("USEEFFECT is First Render: " + isFirstRender);
         if (isFirstRender === true) {
             setInitialQuantity(product)
             setIsFirstRender(false);
