@@ -4,6 +4,7 @@ import './navbar.css';
 import usePathNameState from '../pathname-state';
 import useUserState from '../user-state';
 import LogOut from '../logout/logout';
+import $ from 'jquery';
 
 
 function Navbar() {
@@ -107,17 +108,6 @@ function Navbar() {
     //     history.push(path);
     // }
 
-    // CHAT
-    // useEffect(() => {
-    //     const script = document.createElement('script');
-    //     script.src = "https://userlike-cdn-widgets.s3-eu-west-1.amazonaws.com/881d3b53a69dd16d6ffc7bcdbc10abdda9e12423c56b349d377f7fd6f12d2709.js";
-    //     script.async = true;
-    //     document.body.appendChild(script);
-    //     return (() => {
-    //         document.body.removeChild(script)
-    //     })
-    // }, []);
-
     return (
         <>
             <div className="container-fluid p-0 nav-outer-container text-white" style={navScrollColor} >
@@ -165,7 +155,7 @@ function Navbar() {
                                     :
                                     <>
                                         <ul className="navbar-nav d-flex justify-content-center text-center ml-auto">
-                                            <li className="btn nav-link" type="button"> <Link to="/sensor-registration"  style={textColor} onClick={toggleNavbar}>Sensor registration</Link></li>
+                                            <li className="btn nav-link" type="button"><Link to="/sensor-registration"  style={textColor} onClick={toggleNavbar}>Sensor registration</Link></li>
                                             <li className="btn nav-link" type="button"><Link to="/cart"  style={textColor} onClick={toggleNavbar}>Cart</Link></li>
                                             <li className="btn nav-link" type="button"><Link to="/" data-toggle="modal"  data-target="#exampleModal" style={textColor} onClick={toggleNavbar}>Sign out</Link></li>
                                         </ul>

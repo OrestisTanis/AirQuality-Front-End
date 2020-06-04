@@ -70,7 +70,7 @@ function CartItem(props) {
                                     <button className="btn"><p className="lead scart-product-plus-button" id="product-details-plus-button" onClick={deductQuantity}>-</p></button>
                                 </div>
                                 <div className="col-12">
-                                <p style={{ paddingTop: "0.2rem", fontSize: "1.3rem" }} clasSName="lead text-center" >&euro;{(selectedQuan * product.price).toFixed(2)}</p>
+                                <p style={{ paddingTop: "0.2rem", fontSize: "1.3rem" }} className="lead text-center" >&euro;{(selectedQuan * product.price).toFixed(2)}</p>
                                 </div>
                             </div>
                         </div>

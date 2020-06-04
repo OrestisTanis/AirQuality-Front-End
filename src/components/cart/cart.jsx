@@ -54,7 +54,7 @@ function Cart() {
                     </div>
                     <div className="col-12 col-lg-7">
                         {cartItems.map((item, index) => {
-                            return <><CartItem cartItem={item} setCartItems={setCartItems} /> {index < cartItems.length - 1 ? <hr /> : null}</>
+                            return <><CartItem key={index} cartItem={item} setCartItems={setCartItems} /> {index < cartItems.length - 1 ? <hr /> : null}</>
                         })}
                     </div>
                     <div className="col-12 col-lg-5  sum-item-price-container pb-5 pl-5 pr-5 pr-lg-0 mt-5 mt-lg-0">
@@ -63,7 +63,7 @@ function Cart() {
                             <hr className="mb-2"/>
 
                             {cartItems.map((item, index) => {
-                                return <><div style={{ position: 'relative' }}>
+                                return <><div style={{ position: 'relative' }} key={index}>
                                     <p className="text-center pt-2 lead sum-item-price">{index === cartItems.length - 1 && <span id="sum-item-minus">+</span>}{item.product.price} x {cartItems[index].quantity}<span className="item-quantity-multiply">{(item.product.price * cartItems[index].quantity).toFixed(2)}</span></p>
                                 </div></>
                             })}
