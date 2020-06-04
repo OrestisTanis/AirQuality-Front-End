@@ -13,9 +13,11 @@ import AuthGuard from './auth-guard/auth-guard';
 import PathWatcher from './path-watcher/path-watcher';
 import ProductDetails from './products/product-details';
 import useUserState from './user-state';
+import Order from './order/order';
 import Cart from './cart/cart';
 import SensorRegistration from './sensor-registration/sensor-registration';
 import Data from './data/data';
+import CompletePayment from './complete-payment/complete-payment';
 
 function AirApp() {
     const [userState, setUserState] = useUserState();
@@ -33,9 +35,10 @@ function AirApp() {
             <Navbar></Navbar>
             <Route path="/map" component={Map} />
             <Route exact path="/products" component={Products} />
-            <Route path="/company" component={Company} />
-            <Route exact path="/" component={LandingPage} />
             <Route exact path="/products/:id" component={ProductDetails} />
+            <Route path="/company" component={Company} />
+            <Route path="/order" component={Order} />
+            <Route path="/complete-payment" component={CompletePayment} />
             <Route exact path="/cart" component={Cart} />
             <Route path="/sensor-registration" component={SensorRegistration} />
             <Route path="/data" component={Data} />
@@ -49,7 +52,3 @@ function AirApp() {
 }
 
 export default AirApp;
-
-
-
-
