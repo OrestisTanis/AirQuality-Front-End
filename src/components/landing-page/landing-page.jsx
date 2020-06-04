@@ -39,7 +39,7 @@ function LandingPage() {
                 <div className="container">
                     <div className="row text-center mt-5 mb-5 d-flex justify-content-center">
                         <div className="col-12">
-                            <h2 className="mt-4 mb-4">Accurate local air quality and visualized data</h2>
+                            <h2 className="mt-5 mb-4 pt-1">Accurate local air quality and visualized data</h2>
                         </div>
                         <MainFeature className="col-10 col-md-4 mt-5 mb-5" />
                     </div>
