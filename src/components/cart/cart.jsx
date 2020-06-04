@@ -72,7 +72,7 @@ function Cart() {
                                 <span className="lead sum-total-price-label" style={{fontWeight:'500'}}>total</span><span className="lead sum-total-price" style={{fontWeight:'500'}}>&euro;{totalPrice.toFixed(2)}</span>
                             </div>
 
-                            <div className="col-12 text-center mt-5 mb-5">
+                            <div className="col-12 text-center mt-4 mb-5">
                                 <button className="btn btn-success"><Link to="/order" className="text-white">Proceed to checkout</Link></button>
                             </div>
                         </div>
