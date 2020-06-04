@@ -40,6 +40,7 @@ function AirApp() {
             <Route path="/order" component={Order} />
             <Route path="/complete-payment" component={CompletePayment} />
             <Route exact path="/cart" component={Cart} />
+            <Route exact path="/" component={LandingPage} />
             <Route path="/sensor-registration" component={SensorRegistration} />
             <Route path="/data" component={Data} />
             {console.log("isLoggedIn: ", userState.isLoggedIn)}
