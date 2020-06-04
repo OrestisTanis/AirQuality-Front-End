@@ -10,6 +10,7 @@ function Order(){
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [discount, setDiscount] = useState(5);
   const [errors, setErrors] = useState({});
+  const finalSum = ((totalPrice-(discount*totalPrice)/100)).toFixed(2);
 
   function handlePayment(event) {
       event.preventDefault();
@@ -74,16 +75,14 @@ function Order(){
 
   function doPaypal() {
       // Go to the server || dispatch an action
-      axios.post(`localhost:8080/paypal/make/payment?sum=${((totalPrice-(discount*totalPrice)/100)).toFixed(2)}`,{
-          headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-              //Authorization: 'Bearer ' + token // if you use token
-          }
-      })
+
+      axios.post(`http://localhost:8080/paypal/make/payment?sum=${finalSum}`)
           .then(res => {
             console.log("Payment success..");
-
+            console.log(finalSum);
+            console.log(res.data);
+            const redirectUrl = res.data.redirect_url;
+            window.location.href = redirectUrl;
           }).catch(error => {
               // Handle invalid credentials
               if (error.message) {
@@ -154,10 +153,11 @@ function Order(){
         </li>
         <li className="list-group-item d-flex justify-content-between">
           <span>Total (EUR)</span>
-          <strong>&euro;{totalPrice}</strong>
+          <strong>&euro;{finalSum}</strong>
         </li>
       </ul>
     </div>
+
     <form onSubmit={handlePayment} className="col-md-8 order-md-1">
     <div>
       <h4 className="mb-3">Billing address</h4>
