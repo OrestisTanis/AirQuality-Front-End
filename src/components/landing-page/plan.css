@@ -1,0 +1,10 @@
+.plan-list-item:before {
+    content: "✔";
+    color: #4db1cf !important;
+    text-align: right;
+    padding-right: 6px;
+    width: 10px;
+    position: absolute;
+    left: 0;
+}
+

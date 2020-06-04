@@ -72,24 +72,8 @@ function CartItem(props) {
                                 <div className="col-12">
                                 <p style={{ paddingTop: "0.2rem", fontSize: "1.3rem" }} clasSName="lead text-center" >&euro;{(selectedQuan * product.price).toFixed(2)}</p>
                                 </div>
-                                
-                            </div>
-
-                        </div>
-                        {/* <div className="col-6 d-flex align-items-center text-center pt-5 p-lg-0 mt-5">
-                            <div className="col-4">
-                                <button className="btn"><p className="lead scart-product-plus-button" onClick={addQuantity}>+</p></button>
-                            </div>
-                            <div className="col-4">
-                                <p className="lead scart-product-plus-button" style={{paddingLeft: "1rem"}} id="product-details-quantity">{selectedQuan}</p>
-                            </div>
-                            <div className="col-4">
-                                <button className="btn"><p className="lead scart-product-plus-button" id="product-details-plus-button" onClick={deductQuantity}>-</p></button>
                             </div>
                         </div>
-                        <div className="col-6 d-flex align-items-center text-center pt-5 p-lg-0 mt-5 pl-5">
-                            <p  style={{paddingTop:"0.2rem", fontSize:"1.3rem"}} clasSName="lead" >&euro;{(selectedQuan * product.price).toFixed(2)}</p>
-                        </div> */}
                     </div>
                 </div>
             </div>
