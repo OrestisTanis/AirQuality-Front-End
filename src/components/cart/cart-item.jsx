@@ -57,7 +57,7 @@ function CartItem(props) {
                         <div className="col-6 d-flex justify-content-center">
                             <img className="cart-product-img" src={product.imageUrl} alt="product image" />
                         </div>
-                        <div className="col-6" >
+                        <div className="col-6 pr-5" >
                             <h3 className="lead text-center" style={{ paddingTop: '1rem', fontWeight:'500' }}>{product.name}</h3>
                             <div className="row d-flex align-items-center mt-2 text-center">
                                 <div className="col-3 offset-1">

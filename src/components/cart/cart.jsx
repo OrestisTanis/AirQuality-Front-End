@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {Link} from 'react-router-dom';
 import CartItem from './cart-item';
 
 
@@ -46,7 +47,7 @@ function Cart() {
     return (
         <>
             <p style={{ paddingTop: '7rem'}}></p>
-            <div className="container p-5" >
+            <div className="container" >
                 <div className="row mb-5 pb-5" style={{border:"1px solid rgba(0,0,0,0.3)"}}>
                     <div className="col-12 mb-5  pl-0 pr-0">
                         <h2 className="bg-warning text-white pb-3 pt-2 pl-3">Shopping Cart</h2>
@@ -72,7 +73,7 @@ function Cart() {
                             </div>
 
                             <div className="col-12 text-center mt-5 mb-5">
-                                <button className="btn btn-success">Proceed to checkout</button>
+                                <button className="btn btn-success"><Link to="/order" className="text-white">Proceed to checkout</Link></button>
                             </div>
                         </div>
 
