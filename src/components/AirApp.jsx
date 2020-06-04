@@ -15,6 +15,7 @@ import ProductDetails from './products/product-details';
 import useUserState from './user-state';
 import Order from './order/order';
 import Cart from './cart/cart';
+import CompletePayment from './complete-payment/complete-payment';
 
 
 function AirApp() {
@@ -33,7 +34,11 @@ function AirApp() {
             <Navbar></Navbar>
             <Route path="/map" component={Map} />
             <Route exact path="/products" component={Products} />
+            <Route exact path="/products/:id" component={ProductDetails} />
             <Route path="/company" component={Company} />
+            <Route path="/order" component={Order} />
+            <Route path="/complete-payment" component={CompletePayment} />
+            <Route path="/cart" component={Cart} />
             <Route exact={true} path="/" component={LandingPage} />
             {console.log("isLoggedIn: ", userState.isLoggedIn)}
             {!userState.isLoggedIn &&  <Route path="/login" component={Login} />}
