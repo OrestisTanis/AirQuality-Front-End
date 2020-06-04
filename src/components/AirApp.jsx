@@ -14,20 +14,21 @@ import PathWatcher from './path-watcher/path-watcher';
 import ProductDetails from './products/product-details';
 import useUserState from './user-state';
 import Cart from './cart/cart';
-
+import SensorRegistration from './sensor-registration/sensor-registration';
+import Data from './data/data';
 
 function AirApp() {
     const [userState, setUserState] = useUserState();
 
     return (
-        <>  
+        <>
             {/* Listens for url changes and provides globally the current parth */}
             {/* <PathWatcher/> <- Propably going to be deleted, we dont need it anymore */}
 
             {/* Scrolls to top of the page when url changes */}
-            <ScrollToTop/>
+            <ScrollToTop />
             {/* Checks for JWT validity on URL change and sets the user state accordingly */}
-            <AuthGuard/>
+            <AuthGuard />
 
             <Navbar></Navbar>
             <Route path="/map" component={Map} />
@@ -36,9 +37,11 @@ function AirApp() {
             <Route exact path="/" component={LandingPage} />
             <Route exact path="/products/:id" component={ProductDetails} />
             <Route exact path="/cart" component={Cart} />
+            <Route path="/sensor-registration" component={SensorRegistration} />
+            <Route path="/data" component={Data} />
             {console.log("isLoggedIn: ", userState.isLoggedIn)}
-            {!userState.isLoggedIn &&  <Route path="/login" component={Login} />}
-            {!userState.isLoggedIn &&  <Route path="/sign-up" component={SignUp} />}
+            {!userState.isLoggedIn && <Route path="/login" component={Login} />}
+            {!userState.isLoggedIn && <Route path="/sign-up" component={SignUp} />}
             <Footer></Footer>
 
         </>
