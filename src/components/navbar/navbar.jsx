@@ -114,7 +114,7 @@ function Navbar() {
                                     <Link to="/map" className="nav-link" style={textColor} onClick={toggleNavbar}>Map</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/sensor-registration" className="nav-link" style={textColor} onClick={toggleNavbar}>Senror registration</Link>
+                                    <Link to="/sensor-registration" className="nav-link" style={textColor} onClick={toggleNavbar}>Sensor registration</Link>
                                 </li>
                                 <li className="nav-item">
                                     <Link to="/products" className="nav-link" style={textColor} onClick={toggleNavbar}>Products</Link>
