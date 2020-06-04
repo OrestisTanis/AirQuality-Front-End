@@ -1,11 +1,12 @@
 import React from 'react';
 import './form-validation.css';
-import ScriptTag from 'react-script-tag';
+
 
 function Order(){
+
   return(
     <>
-    <div className="container" style={{paddingTop:'10rem'}}>
+    <div className="container" style={{paddingTop:'12rem'}}>
   <div className="row">
     <div className="col-md-4 order-md-2 mb-4">
       <h4 className="d-flex justify-content-between align-items-center mb-3">
@@ -26,13 +27,6 @@ function Order(){
             <small className="text-muted">Brief description</small>
           </div>
           <span className="text-muted">€8</span>
-        </li>
-        <li className="list-group-item d-flex justify-content-between lh-condensed">
-          <div>
-            <h6 className="my-0">Third item</h6>
-            <small className="text-muted">Brief description</small>
-          </div>
-          <span className="text-muted">€5</span>
         </li>
         <li className="list-group-item d-flex justify-content-between bg-light">
           <div className="text-success">
@@ -142,7 +136,7 @@ function Order(){
           <label className="custom-control-label" for="save-info">Save this information for next time</label>
         </div>
         <hr className="mb-4"/><br/>
-        <button className="btn btn-primary btn-lg btn-block" type="submit">Connect with paypal</button>
+        <button className="btn btn-warning btn-lg btn-block text-white" type="submit">Connect with paypal</button>
       </form>
     </div>
   </div>
