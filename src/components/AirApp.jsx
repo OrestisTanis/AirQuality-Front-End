@@ -41,11 +41,11 @@ function AirApp() {
             <Route path="/complete-payment" component={CompletePayment} />
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/" component={LandingPage} />
-            <Route path="/sensor-registration" component={SensorRegistration} />
             <Route path="/data" component={Data} />
             {console.log("isLoggedIn: ", userState.isLoggedIn)}
             {!userState.isLoggedIn && <Route path="/login" component={Login} />}
             {!userState.isLoggedIn && <Route path="/sign-up" component={SignUp} />}
+            {userState.isLoggedIn &&  <Route path="/sensor-registration" component={SensorRegistration} />}
             <Footer></Footer>
 
         </>

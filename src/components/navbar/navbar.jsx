@@ -69,13 +69,13 @@ function Navbar() {
         let pathname = history.location.pathname;
         let windowWidth = window.innerWidth;
         let scrollHeightTrigger = 0;
-        
+
         if (pathname === "/" && windowWidth < 768) scrollHeightTrigger = document.getElementById("image-poster").offsetHeight;
         if (pathname === "/" && windowWidth >= 768) scrollHeightTrigger = document.getElementById("video-bg").offsetHeight;
         if (pathname !== "/") setNavBarState({ navColor: endNavBgColor, textColor: endTextColor, hamIconBgColor: endHamIconBgColor });
 
         // Change navbar colors on scroll, only in the landing page)
-        if (pathname === "/" ) {
+        if (pathname === "/") {
             if (document.body.scrollTop > scrollHeightTrigger || document.documentElement.scrollTop > scrollHeightTrigger) {
                 setNavBarState({ navColor: endNavBgColor, textColor: endTextColor, hamIconBgColor: endHamIconBgColor });
             } else {
@@ -84,11 +84,11 @@ function Navbar() {
         }
     }
 
-    function handlePaddingOnScroll(){
+    function handlePaddingOnScroll() {
         // Change padding on scroll for all pages
         if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) setNavScrollStyle(endPadding);
         else setNavScrollStyle(startPadding);
-   }
+    }
 
     function setNavBarState(obj) {
         setNavScrollColor(obj.navColor);
@@ -144,9 +144,6 @@ function Navbar() {
                                 <li className="nav-item mb-1">
                                     <Link to="/map" className="nav-link" style={textColor} onClick={toggleNavbar}>Map</Link>
                                 </li>
-                                <li className="nav-item mb-1">
-                                    <Link to="/sensor-registration" className="nav-link" style={textColor} onClick={toggleNavbar}>Sensor registration</Link>
-                                </li>
                                 <li className="nav-item">
                                     <Link to="/products" className="nav-link" style={textColor} onClick={toggleNavbar}>Products</Link>
                                 </li>
@@ -157,7 +154,7 @@ function Navbar() {
                             {/* LOGIN, SIGN-UP BUTTONS  */}
                             {
                                 !userState.isLoggedIn ?
-                                    <> 
+                                    <>
                                         <div className="d-flex justify-content-center ml-md-auto">
                                             <button className="btn nav-link pb-1 pt-1" type="button"><Link to="/login" className="nav-link" style={textColor} onClick={toggleNavbar}>Login</Link></button>
                                         </div>
@@ -165,11 +162,14 @@ function Navbar() {
                                             <button className="btn nav-link" type="button"><Link to="/sign-up" className="nav-link" style={textColor} onClick={toggleNavbar}>Sign-up</Link></button>
                                         </div>
                                     </>
-                                :
+                                    :
+                                    <>
                                     <div className="d-flex justify-content-center ml-md-auto">
+                                    <button className="btn nav-link" type="button"> <Link to="/sensor-registration" className="nav-link" style={textColor} onClick={toggleNavbar}>Sensor registration</Link></button>
                                         <button className="btn nav-link" type="button"><Link to="/cart" className="nav-link pt-1 pt-lg-0" style={textColor} onClick={toggleNavbar}>Cart</Link></button>
                                         <button className="btn nav-link" type="button"><Link to="/" data-toggle="modal" className="nav-link pt-1 pt-lg-0" data-target="#exampleModal" style={textColor} onClick={toggleNavbar}>Sign out</Link></button>
                                     </div>
+                                    </>
                             }
                         </div>
                     </nav>
