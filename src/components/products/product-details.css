@@ -1,0 +1,25 @@
+#stock {
+    background-color: rgb(69,210,124);
+}
+#product-details-line{
+    height: 0.1rem;
+    width: 2rem;
+    border-radius:10%;
+}
+#product-details-price{
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+#product-details-price-number {
+    font-size: 1.3rem;
+}
+.fontsize-2{
+    font-size:1.6rem;
+}
+#product-details-image{
+    max-height: 20rem;
+}
+.bold {
+    font-weight: 500;
+}
+

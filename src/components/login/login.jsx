@@ -1,17 +1,17 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import '../../shared/css/validation-errors.css';
 import useUserState from '../user-state';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
-function Login(){
+function Login() {
     const starStyle = {
         color: "rgba(253, 17, 17, 0.7)"
     };
     // The user's global state
     const [userState, setUserState] = useUserState();
     // Private state used for error handling
-    const [errors, setErrors]=useState({});
+    const [errors, setErrors] = useState({});
     let history = useHistory();
 
     // Handler for the form submit event
@@ -49,24 +49,22 @@ function Login(){
                 //Authorization: 'Bearer ' + token // if you use token
             }
         })
-        .then(res => {
-            // Handle successful login
-            console.log(res);
-            console.log(res.data);
-            // Saving the token in client's local storage
-            localStorage.setItem("token", res.data.token);
-            setUserState(state => ({...state, isLoggedIn: true}));
-            history.goBack();
-            
-        }).catch(error => {
-            console.log(error);
-            // Handle invalid credentials
-            if (error.message){
-                const errors = {};
-                errors.invalidCredentials = "Invalid username or password.";
-                setErrors(errors);
-            }
-        })
+            .then(res => {
+                // Handle successful login
+                // Saving the token in client's local storage
+                localStorage.setItem("token", res.data.token);
+                setUserState(state => ({ ...state, isLoggedIn: true }));
+                history.goBack();
+
+            }).catch(error => {
+                // Handle invalid credentials
+                if (error.message) {
+                    console.log(error.message);
+                    const errors = {};
+                    errors.invalidCredentials = "Invalid username or password.";
+                    setErrors(errors);
+                }
+            })
     }
 
     return (
@@ -95,7 +93,7 @@ function Login(){
                                     </small>
                                 </div>
                                 <div className={(errors.invalidCredentials ? "show" : "hide") + " signup-errors text-center"}>
-                                    {errors.invalidCredentials + ""} 
+                                    {errors.invalidCredentials + ""}
                                 </div>
                             </form>
                             <div className="d-flex justify-content-center">
@@ -105,7 +103,6 @@ function Login(){
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }

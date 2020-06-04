@@ -1,0 +1,26 @@
+.product-title {
+    font-size:1.1rem;
+}
+.product-price {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+.to-cart-button{
+    height: 3rem;
+    border-radius: 5px !important;
+    border: 1px solid rgba(0, 0, 0, 0.123) !important;
+    /* background-color: rgb(77, 143, 80) !important; */
+}
+.to-cart-button:hover, .to-cart-button:active {
+    background-color: rgb(98, 168, 101) !important;
+}
+.product-image {
+    object-fit:cover;
+    width: auto;
+    height: 15rem;
+    margin: auto;
+}
+
+.plus-minus-buttons {
+    height: 3rem;
+}

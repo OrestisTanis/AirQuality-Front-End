@@ -1,0 +1,12 @@
+#errorImg-container{
+    position:relative;
+}
+#errorImg{
+    position: absolute;
+    left:0;
+    bottom:0;
+    max-width: 60vw;
+    height: auto;
+    width: 22.8125rem;
+    object-fit:cover;
+}

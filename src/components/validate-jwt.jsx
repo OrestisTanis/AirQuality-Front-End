@@ -23,4 +23,15 @@ const isJWTExpiredOrNull = function(token){
     }
 }
 
+export let getUsernameFromJWT = function(token){
+    if (token) {
+        // Get username from token
+        const username = jwtDecode(token).sub;
+        return username;
+    }
+    else {
+        return '';
+    }
+}
+
 export default isJWTExpiredOrNull;

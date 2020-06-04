@@ -24,10 +24,28 @@ button.navbar-toggler:focus {
     outline: none;
     outline: none;
 }
+.navbar-toggler .line{
+    width: 100%;
+    float: left;
+    height: 0.18rem;
+    margin-bottom: 5px;
+}
 .navbar-brand{
     padding-bottom: 0.5rem !important;
 }
 #sign-out-button {
   text-decoration: none;
+}
+.nav-link {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    font-weight: 500;
+}
+.nav-link Link {
+    
+}
+#brand-name {
+    position: relative;
+    bottom: 0.16rem;
 }
 
