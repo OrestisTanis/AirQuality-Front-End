@@ -36,16 +36,14 @@ button.navbar-toggler:focus {
 #sign-out-button {
   text-decoration: none;
 }
-.nav-link {
+.nav-link, .nav-link > * {
     padding-top: 0 !important;
     padding-bottom: 0 !important;
     font-weight: 500;
-}
-.nav-link Link {
-    
+    margin-top:0.2rem;
+    margin-bottom:0.2rem;
 }
 #brand-name {
     position: relative;
     bottom: 0.16rem;
 }
-

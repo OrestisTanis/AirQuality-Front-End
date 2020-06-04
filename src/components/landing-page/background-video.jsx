@@ -1,4 +1,4 @@
-import React, { isValidElement } from 'react';
+import React from 'react';
 import poster from '../../shared/vid/cityPoster.png';
 import vid from '../../shared/vid/city.mp4';
 import './background-video.css'
@@ -20,7 +20,7 @@ function BackgroundVideo(props) {
                 <source src={vid} type="video/mp4" />
             </video>
             <div className="d-md-none">
-                <img id="image-poster" src={poster} alt="fresh air image" />
+                <img id="image-poster" src={poster} alt="" />
                 <img src={downArrow} id="image-down-button" onClick={handleDownButtonClick}/>
             </div>
             <img src={downArrow} id="image-down-button" onClick={handleDownButtonClick}/>

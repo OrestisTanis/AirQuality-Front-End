@@ -156,19 +156,19 @@ function Navbar() {
                                 !userState.isLoggedIn ?
                                     <>
                                         <div className="d-flex justify-content-center ml-md-auto">
-                                            <button className="btn nav-link pb-1 pt-1" type="button"><Link to="/login" className="nav-link" style={textColor} onClick={toggleNavbar}>Login</Link></button>
+                                            <button className="btn nav-link pb-1 pt-1" type="button"><Link to="/login"  style={textColor} onClick={toggleNavbar}>Login</Link></button>
                                         </div>
                                         <div className="d-flex justify-content-center">
-                                            <button className="btn nav-link" type="button"><Link to="/sign-up" className="nav-link" style={textColor} onClick={toggleNavbar}>Sign-up</Link></button>
+                                            <button className="btn nav-link" type="button"><Link to="/sign-up"  style={textColor} onClick={toggleNavbar}>Sign-up</Link></button>
                                         </div>
                                     </>
                                     :
                                     <>
-                                    <div className="d-flex justify-content-center ml-md-auto">
-                                    <button className="btn nav-link" type="button"> <Link to="/sensor-registration" className="nav-link" style={textColor} onClick={toggleNavbar}>Sensor registration</Link></button>
-                                        <button className="btn nav-link" type="button"><Link to="/cart" className="nav-link pt-1 pt-lg-0" style={textColor} onClick={toggleNavbar}>Cart</Link></button>
-                                        <button className="btn nav-link" type="button"><Link to="/" data-toggle="modal" className="nav-link pt-1 pt-lg-0" data-target="#exampleModal" style={textColor} onClick={toggleNavbar}>Sign out</Link></button>
-                                    </div>
+                                        <ul className="navbar-nav d-flex justify-content-center text-center ml-auto">
+                                            <li className="btn nav-link" type="button"> <Link to="/sensor-registration"  style={textColor} onClick={toggleNavbar}>Sensor registration</Link></li>
+                                            <li className="btn nav-link" type="button"><Link to="/cart"  style={textColor} onClick={toggleNavbar}>Cart</Link></li>
+                                            <li className="btn nav-link" type="button"><Link to="/" data-toggle="modal"  data-target="#exampleModal" style={textColor} onClick={toggleNavbar}>Sign out</Link></li>
+                                        </ul>
                                     </>
                             }
                         </div>

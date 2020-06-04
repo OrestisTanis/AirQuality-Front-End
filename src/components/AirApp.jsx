@@ -1,5 +1,5 @@
-import React, { createContext } from 'react';
-import { Link, Route, Switch } from "react-router-dom";
+import React from 'react';
+import { Route } from "react-router-dom";
 import Navbar from './navbar/navbar';
 import Footer from './footer/footer';
 import Map from './map/map';
@@ -10,7 +10,7 @@ import Products from './products/products';
 import Company from './company/company';
 import ScrollToTop from './scrollToTop/scrollToTop';
 import AuthGuard from './auth-guard/auth-guard';
-import PathWatcher from './path-watcher/path-watcher';
+// import PathWatcher from './path-watcher/path-watcher';
 import ProductDetails from './products/product-details';
 import useUserState from './user-state';
 import Order from './order/order';
@@ -24,9 +24,6 @@ function AirApp() {
 
     return (
         <>
-            {/* Listens for url changes and provides globally the current parth */}
-            {/* <PathWatcher/> <- Propably going to be deleted, we dont need it anymore */}
-
             {/* Scrolls to top of the page when url changes */}
             <ScrollToTop />
             {/* Checks for JWT validity on URL change and sets the user state accordingly */}
@@ -42,12 +39,11 @@ function AirApp() {
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/" component={LandingPage} />
             <Route path="/data" component={Data} />
-            {console.log("isLoggedIn: ", userState.isLoggedIn)}
+            {/* {console.log("isLoggedIn: ", userState.isLoggedIn)} */}
             {!userState.isLoggedIn && <Route path="/login" component={Login} />}
             {!userState.isLoggedIn && <Route path="/sign-up" component={SignUp} />}
             {userState.isLoggedIn &&  <Route path="/sensor-registration" component={SensorRegistration} />}
             <Footer></Footer>
-
         </>
     )
 }

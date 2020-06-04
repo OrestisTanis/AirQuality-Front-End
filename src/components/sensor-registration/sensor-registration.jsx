@@ -29,7 +29,7 @@ function SensorRegistration() {
     return (
         <div className="container pt-5 pb-5">
             <div className="row d-flex justify-content-center mt-5 mb-5">
-                <div className="col-7 shadow mt-5">
+                <div className="col-10 col-md-7 shadow mt-5">
                     <div className="row d-flex justify-content-center mt-3 mb-4">
                         <div className="col-12 text-center mt-3 mb-3">
                             <h5>Select your sensor location</h5>

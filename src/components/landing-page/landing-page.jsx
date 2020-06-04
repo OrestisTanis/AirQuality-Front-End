@@ -53,8 +53,8 @@ function LandingPage() {
                         <h2 className="mb-5 pb-2 light-blue mt-5">Our available plans</h2>
                     </div>
                         {
-                            plans.map(plan => {
-                                return <Plan className="col-10 col-md-6 col-lg-5 col-xl-4 mb-5" plan={plan}></Plan>
+                            plans.map((plan,index) => {
+                                return <Plan className="col-10 col-md-6 col-lg-5 col-xl-4 mb-5" key={index} plan={plan}></Plan>
                             })
                         }
                 </div>
