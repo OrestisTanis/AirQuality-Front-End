@@ -13,7 +13,7 @@ import AuthGuard from './auth-guard/auth-guard';
 import PathWatcher from './path-watcher/path-watcher';
 import useUserState from './user-state';
 import SensorRegistration from './sensor-registration/sensor-registration';
-
+import Data from './data/data';
 
 function AirApp() {
     const [userState, setuserState] = useUserState();
@@ -32,6 +32,7 @@ function AirApp() {
             <Route path="/products" component={Products} />
             <Route path="/company" component={Company} />
             <Route path="/sensor-registration" component={SensorRegistration} />
+            <Route path="/data" component={Data} />
             <Route exact={true} path="/" component={LandingPage} />
             {console.log("isLoggedIn: ", userState.isLoggedIn)}
             {!userState.isLoggedIn && <Route path="/login" component={Login} />}
