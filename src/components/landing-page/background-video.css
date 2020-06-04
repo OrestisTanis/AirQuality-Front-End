@@ -49,8 +49,8 @@ body {
     transform: translate(-50%, -50%);
     top:92%;
     left: 50%;
-    width: 2rem;
-    height: 2rem;
+    width: 1.8rem;
+    height: 1.8rem;
 }
 #image-down-button:hover{
     cursor:pointer;
