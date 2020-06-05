@@ -54,8 +54,8 @@ function Login() {
                 // Saving the token in client's local storage
                 localStorage.setItem("token", res.data.token);
                 setUserState(state => ({ ...state, isLoggedIn: true }));
-                history.goBack();
-
+                const path = "/";
+                history.push(path);
             }).catch(error => {
                 // Handle invalid credentials
                 if (error.message) {
