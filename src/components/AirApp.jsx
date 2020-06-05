@@ -18,6 +18,7 @@ import Cart from './cart/cart';
 import SensorRegistration from './sensor-registration/sensor-registration';
 import Data from './data/data';
 import CompletePayment from './complete-payment/complete-payment';
+import SignUpSuccess from './sign-up/sign-up-success';
 
 function AirApp() {
     const [userState, setUserState] = useUserState();
@@ -39,6 +40,7 @@ function AirApp() {
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/" component={LandingPage} />
             <Route path="/data" component={Data} />
+            <Route path="/registration-success" component={SignUpSuccess} />
             {/* {console.log("isLoggedIn: ", userState.isLoggedIn)} */}
             {!userState.isLoggedIn && <Route path="/login" component={Login} />}
             {!userState.isLoggedIn && <Route path="/sign-up" component={SignUp} />}

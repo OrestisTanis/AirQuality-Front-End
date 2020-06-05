@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import '../../shared/css/validation-errors.css';
 
 function SignUp() {
     const starStyle = {
         color: "rgba(253, 17, 17, 0.7)"
     };
-
+    const history = useHistory();
     const [errors, setErrors]=useState({});
 
     function handleSignUp(event) {
@@ -80,6 +80,8 @@ function SignUp() {
         .then(res => {
             console.log(res);
             console.log(res.data);
+            const path = "/registration-success";
+            history.push(path);
         }).catch(error => {
             console.log(error.message);
         })
