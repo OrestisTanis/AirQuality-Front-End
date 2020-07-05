@@ -4,6 +4,7 @@ import './navbar.css';
 import usePathNameState from '../pathname-state';
 import useUserState from '../user-state';
 import LogOut from '../logout/logout';
+import authService from '../services/authentication-service';
 import $ from 'jquery';
 
 
@@ -40,6 +41,8 @@ function Navbar() {
     useEffect(() => {
         setNavbarInitialState();
         handleNavbarStateOnScroll();
+        // console.log("USER STATE IS: ")
+        // console.log(userState);
     }, [history.location.pathname]);
 
     function setNavbarInitialState() {
@@ -146,18 +149,24 @@ function Navbar() {
                                 !userState.isLoggedIn ?
                                     <>
                                         <div className="d-flex justify-content-center ml-md-auto">
-                                            <button className="btn nav-link pb-1 pt-1" type="button"><Link to="/login"  style={textColor} onClick={toggleNavbar}>Login</Link></button>
+                                            <button className="btn nav-link pb-1 pt-1" type="button"><Link to="/login" style={textColor} onClick={toggleNavbar}>Login</Link></button>
                                         </div>
                                         <div className="d-flex justify-content-center">
-                                            <button className="btn nav-link" type="button"><Link to="/sign-up"  style={textColor} onClick={toggleNavbar}>Sign-up</Link></button>
+                                            <button className="btn nav-link" type="button"><Link to="/sign-up" style={textColor} onClick={toggleNavbar}>Sign-up</Link></button>
                                         </div>
                                     </>
                                     :
                                     <>
                                         <ul className="navbar-nav d-flex justify-content-center text-center ml-auto">
-                                            <li className="btn nav-link" type="button"><Link to="/sensor-registration"  style={textColor} onClick={toggleNavbar}>Sensor registration</Link></li>
-                                            <li className="btn nav-link" type="button"><Link to="/cart"  style={textColor} onClick={toggleNavbar}>Cart</Link></li>
-                                            <li className="btn nav-link" type="button"><Link to="/" data-toggle="modal"  data-target="#exampleModal" style={textColor} onClick={toggleNavbar}>Sign out</Link></li>
+                                            { userState.roles.includes("ROLE_ADMIN") ?
+                                                <li className="btn nav-link" type="button"><Link to="/admin" style={textColor} onClick={toggleNavbar}>Admin</Link></li>
+                                                :
+                                                <>
+                                                    <li className="btn nav-link" type="button"><Link to="/sensor-registration" style={textColor} onClick={toggleNavbar}>Sensor registration</Link></li>
+                                                    <li className="btn nav-link" type="button"><Link to="/cart" style={textColor} onClick={toggleNavbar}>Cart</Link></li>
+                                                </>
+                                            }
+                                            <li className="btn nav-link" type="button"><Link to="/" data-toggle="modal" data-target="#exampleModal" style={textColor} onClick={toggleNavbar}>Sign out</Link></li>
                                         </ul>
                                     </>
                             }

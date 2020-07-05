@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useLocation, useHistory, Link } from "react-router-dom";
 import useUserState from '../user-state';
 import Error from '../errors/error';
 import React from 'react';
 import axios from 'axios';
+import productService from "../services/product-service";
 import './product-details.css';
+
 
 export default function ProductDetails() {
     const { pathname } = useLocation();
@@ -19,7 +21,7 @@ export default function ProductDetails() {
     const [isFirstRender, setIsFirstRender] = useState(true);
     const username = userState.username;
     const [cartItem, setCartItem] = useState({ product: { id: 0, name: '', price: '', imageUrl: '' }, quantity: 0 });
-
+   
 
     function setCartItemId(newId) {
         cartItem = { product: { id: newId }, quantity: 0 };
@@ -27,25 +29,27 @@ export default function ProductDetails() {
 
     // Will run once after component load
     useEffect(() => {
-        getProductData();
+       getProductData();
     }, []);
 
-    function getProductData() {
+    function getProductData(isSubscribed) {
+        // pathname = /products/id, we need to get id
+        const id = pathname.slice(pathname.indexOf("/", pathname.indexOf("/") + 1) + 1);
         // Go to the server || dispatch an action
-        axios.get(`http://localhost:8080${pathname}`)
+        productService.getProductById(id)
             .then(res => {
                 // Handle successful fetch of data
                 const resData = res.data;
                 //console.log(resData);
                 const descSentenceArr = resData.description.split(";");
                 const techDetailsArr = resData.technicalDetails.split(";");
+
                 setProduct(resData);
                 setDescSentencesArr(descSentenceArr);
                 setFirstSentence(descSentenceArr[0].split('.')[0]);
                 setTechDetailsArr(techDetailsArr);
                 setCartItem({ product: { id: resData.id }, quantity: 0 });
                 setInitialQuantityById(resData.id);
-
             }).catch(error => {
                 // Handle errors
                 const errors = {};
@@ -80,20 +84,16 @@ export default function ProductDetails() {
 
     function addQuantity() {
         let oldQuan = selectedQuan;
-        console.log("CARTITEM FROM ADDQUAN", cartItem);
-        //cartItem.product.quantity = selectedQuan;
         setSelectedQuan(++oldQuan);
     }
 
     function deductQuantity() {
         let oldQuan = selectedQuan;
-        //product.quantity = selectedQuan;
         setSelectedQuan(--oldQuan);
     }
 
     // Will run once after component load
     useEffect(() => {
-        console.log("USEEFFECT is First Render: " + isFirstRender);
         if (isFirstRender === true) setIsFirstRender(false);
 
         if (isFirstRender === false) saveCartToLocalStorage();
@@ -227,7 +227,7 @@ export default function ProductDetails() {
                             <div className="col-10 mb-5 mt-1" style={{ maxWidth: "68rem" }}>
                                 <h4 className="mb-4">Description</h4>
                                 {descSentencesArr.map((sentence, index) => {
-                                    return index % 2 === 0 ? <><p>{sentence}</p><br></br></> : <p>{sentence}</p>;
+                                    return index % 2 === 0 ? <div key={index}><p key={index}>{sentence}</p><br></br></div> : <p key={index}>{sentence}</p>;
                                 })}
                             </div>
                         </div>
@@ -238,7 +238,7 @@ export default function ProductDetails() {
                                 <h4 className="mb-4">Technical Details</h4>
                                 <ul>
                                     {techDetailsArr.map((sentence, index) => {
-                                        return index < techDetailsArr.length - 1 ? <li className="mb-1">{sentence}</li> : null
+                                        return index < techDetailsArr.length - 1 ? <li className="mb-1" key={index}>{sentence}</li> : null
                                     })}
                                 </ul>
                             </div>
