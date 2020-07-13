@@ -20,6 +20,7 @@ import Data from './data/data';
 import CompletePayment from './complete-payment/complete-payment';
 import SignUpSuccess from './sign-up/sign-up-success';
 import AdminPanel from './admin-panel/admin-panel';
+import AdminProduct from './admin-panel/admin-product';
 
 function AirApp() {
     const [userState, setUserState] = useUserState();
@@ -42,7 +43,8 @@ function AirApp() {
             <Route exact path="/" component={LandingPage} />
             <Route path="/data" component={Data} />
             <Route path="/registration-success" component={SignUpSuccess} />
-            <Route path="/admin" component={AdminPanel} />
+            <Route path="/admin" exact={true} component={AdminPanel} />
+            <Route path="/admin/products/" component={AdminProduct} />
             {/* {console.log("isLoggedIn: ", userState.isLoggedIn)} */}
             {!userState.isLoggedIn && <Route path="/login" component={Login} />}
             {!userState.isLoggedIn && <Route path="/sign-up" component={SignUp} />}

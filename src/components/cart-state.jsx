@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 
 let listeners = [];
 let state = { 
-  cartItems: []
+  cartItems: [],
+  subscription: null
  };
 
 const setState = (newState) => {

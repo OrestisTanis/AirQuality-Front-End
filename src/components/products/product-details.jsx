@@ -32,9 +32,9 @@ export default function ProductDetails() {
        getProductData();
     }, []);
 
-    function getProductData(isSubscribed) {
+    function getProductData() {
         // pathname = /products/id, we need to get id
-        const id = pathname.slice(pathname.indexOf("/", pathname.indexOf("/") + 1) + 1);
+        const id = pathname.slice(pathname.lastIndexOf("/") + 1);
         // Go to the server || dispatch an action
         productService.getProductById(id)
             .then(res => {

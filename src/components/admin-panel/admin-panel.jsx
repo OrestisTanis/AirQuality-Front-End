@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import AdminProducts from './admin-products';
 import AdminOrders from './admin-orders';
+import AdminPlans from './admin-plans';
 
 function AdminPanel() {
     const [isFirstRender, setIsFirstRender] = useState(true);
@@ -29,23 +30,30 @@ function AdminPanel() {
     return (
         <div className="container pt-5 pb-5">
 
-            <p className="pt-5 text-left">
-                <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Orders</a>
-                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Products</button>
-                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Plans</button>
-            </p>
-            <div class="row">
-                <div class="col-12">
-                    <div class="collapse multi-collapse" id="multiCollapseExample1">
-                        <div class="card card-body">
+            {/* <p className="pt-5 text-left">
+                <a className="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Orders</a>
+                <button className="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Products</button>
+                <button className="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample3" aria-expanded="false" aria-controls="multiCollapseExample2">Plans</button>
+            </p> */}
+            <div className="row">
+                <div className="col-12 pt-5">
+                    <div >
+                        <div className="card card-body">
+                            <AdminProducts></AdminProducts>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-12 pt-5">
+                    <div >
+                        <div className="card card-body">
                             <AdminOrders></AdminOrders>
                         </div>
                     </div>
                 </div>
-                <div class="col-12">
-                    <div class="collapse multi-collapse" id="multiCollapseExample2">
-                        <div class="card card-body">
-                            <AdminProducts></AdminProducts>
+                <div className="col-12 pt-5">
+                    <div >
+                        <div className="card card-body">
+                            <AdminPlans></AdminPlans>
                         </div>
                     </div>
                 </div>

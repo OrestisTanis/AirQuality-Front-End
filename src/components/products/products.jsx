@@ -39,10 +39,10 @@ function Products() {
             <div style={{ paddingTop: '9rem' }}></div>
             <h2 className="text-center"> Our Products </h2>
             <div className="container">
-                {productData  === [] ? 
+                {productData === [] ?
                     // Spinner
                     <div class="d-flex justify-content-center mt-5 mb-5">
-                        <div class="spinner-border text-success" role="status" style={{width: "5rem", height: "5rem"}}>
+                        <div class="spinner-border text-success" role="status" style={{ width: "5rem", height: "5rem" }}>
                             <span class="sr-only">Loading...</span>
                         </div>
                     </div>

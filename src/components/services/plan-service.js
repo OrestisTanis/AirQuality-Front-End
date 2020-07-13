@@ -16,6 +16,11 @@ function PlanService() {
         return axios.get(this.API_URL + 'plans');
     }
 
+    this.getPlanById = function(planId) {
+        // return axios.get(this.API_URL + `plans/${planId}`, { headers: authHeader() });
+        return axios.get(this.API_URL + `plans/${planId}`);
+    }
+
      // cache
 	PlanService.instance = this;
 	

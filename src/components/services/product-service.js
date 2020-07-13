@@ -21,7 +21,24 @@ function ProductService() {
         return axios.get(this.API_URL + `products/${id}`);
     }
 
-     // cache
+    this.updateProduct = function(product) {
+        // return axios.get(this.API_URL + `products/${id}`, { headers: authHeader() });
+        return axios.put(this.API_URL + `products/${product.id}`, product );
+    }
+
+    this.deleteProductById = function(productId) {
+        // return axios.get(this.API_URL + `products/${id}`, { headers: authHeader() });
+        return axios.delete(this.API_URL + `products/${productId}`);
+    }
+
+    this.addProduct = function(product) {
+        // return axios.get(this.API_URL + `products/${id}`, { headers: authHeader() });
+        console.log("BEFORE SENDING TO SERVER FOR POST");
+        console.log(product);
+        return axios.post(this.API_URL + `products`, product);
+    }
+
+    // cache
 	ProductService.instance = this;
 	
 	// implicit return
