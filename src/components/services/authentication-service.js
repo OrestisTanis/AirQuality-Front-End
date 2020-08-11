@@ -7,7 +7,7 @@ function AuthService() {
 	if (typeof AuthService.instance === 'object') {
 		return AuthService.instance;
     }
-	
+
 	// proceed as normal
     this.roles = localStorage.getItem("roles") || [];
     this.API_URL = apiUrlService.getApiURL();
@@ -15,7 +15,7 @@ function AuthService() {
 
     // register
     this.register = function(userInfo) {
-        return new Promise((resolve, reject) => 
+        return new Promise((resolve, reject) =>
             axios.post(this.API_URL + "register", userInfo)
             .then(res => {
                 console.log(res);
@@ -33,7 +33,7 @@ function AuthService() {
 
     // login
     this.login = function(username, password) {
-        return new Promise((resolve, reject) =>  
+        return new Promise((resolve, reject) =>
         axios.post(this.API_URL + "authenticate", {
                 username,
                 password
@@ -73,11 +73,6 @@ function AuthService() {
        return this.roles;
     }
 
-    // get current user
-    this.getCurrentUser = function() {
-        return this.username;
-    }
-
     // isUserLoggedIn
     this.isUserLoggedIn = function(){
         const result = localStorage.getItem("user") ? true : false;
@@ -90,10 +85,10 @@ function AuthService() {
         console.log("this.roles: " + this.roles);
         return this.roles.includes("ROLE_ADMIN");
     }
-	
+
 	// cache
 	AuthService.instance = this;
-	
+
 	// implicit return
 	return this;
 }

@@ -23,7 +23,6 @@ function Products() {
                     fetchedProducts.push(product);
                 });
                 setProductData(fetchedProducts);
-
             }).catch(error => {
                 // Handle errors
                 if (error.message) {
@@ -60,6 +59,3 @@ function Products() {
 }
 
 export default Products;
-
-
-

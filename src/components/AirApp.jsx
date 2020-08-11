@@ -21,6 +21,7 @@ import CompletePayment from './complete-payment/complete-payment';
 import SignUpSuccess from './sign-up/sign-up-success';
 import AdminPanel from './admin-panel/admin-panel';
 import AdminProduct from './admin-panel/admin-product';
+import Sensors from './sensors/sensors';
 
 function AirApp() {
     const [userState, setUserState] = useUserState();
@@ -48,7 +49,9 @@ function AirApp() {
             {/* {console.log("isLoggedIn: ", userState.isLoggedIn)} */}
             {!userState.isLoggedIn && <Route path="/login" component={Login} />}
             {!userState.isLoggedIn && <Route path="/sign-up" component={SignUp} />}
-            {userState.isLoggedIn &&  <Route path="/sensor-registration" component={SensorRegistration} />}
+            {!userState.isLoggedIn &&  <Route path="/sensor-registration" component={SensorRegistration} />}
+            {userState.isLoggedIn &&  <Route path="/sensors" component={Sensors} />}
+
             <Footer></Footer>
         </>
     )

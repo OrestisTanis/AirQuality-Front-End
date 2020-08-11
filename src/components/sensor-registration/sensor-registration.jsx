@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+import SensorService from '../services/sensor-service';
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -16,10 +17,12 @@ function SensorRegistration() {
     const [markerPosition, setMarkerPosition] = useState([37.968713, 23.729195]);
     const [userPosition, setUserPosition] = useState([37.968713, 23.729195])
 
-    navigator.geolocation.getCurrentPosition(function (position) {
-        setUserPosition([position.coords.latitude, position.coords.longitude]);
-        console.log(userPosition)
-    });
+    function getGeolocation() {
+        return (navigator.geolocation.getCurrentPosition(function (position) {
+            setUserPosition([position.coords.latitude, position.coords.longitude]);
+            console.log(userPosition)
+        }))
+    }
 
     function handleClick(e) {
         console.log(e.latlng);
@@ -28,6 +31,7 @@ function SensorRegistration() {
 
     // CHAT
     useEffect(() => {
+        getGeolocation();
         const chat = document.getElementById('userlike');
         var script;
         if (chat) {
@@ -83,6 +87,3 @@ function SensorRegistration() {
 }
 
 export default SensorRegistration;
-
-
-
