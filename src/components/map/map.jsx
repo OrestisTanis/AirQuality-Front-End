@@ -7,6 +7,8 @@ import 'react-leaflet-markercluster/dist/styles.min.css';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import SensorService from '../services/sensor-service';
+
 
 function Map() {
     const [sensors, setSensors] = useState([
@@ -45,7 +47,7 @@ function Map() {
 
     function getCurrentData() {
         // Go to the server || dispatch an action
-        axios.get(`http://localhost:8080/current`)
+        SensorService.getCurrentPm()
             .then(res => {
                 // Handle successful fetch of data
                 console.log(res.data);
@@ -118,6 +120,3 @@ function Map() {
 }
 
 export default Map;
-
-
-

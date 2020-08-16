@@ -21,6 +21,10 @@ function SensorService() {
         return axios.get(this.API_URL + `sensorlocation/${username}`);
     }
 
+    this.getCurrentPm = function(){
+      return axios.get(this.API_URL + `current`);
+    }
+
     this.getSensorById = function(id) {
         // return axios.get(this.API_URL + `Sensors/${id}`, { headers: authHeader() });
         return axios.get(this.API_URL + `Sensors/${id}`);
