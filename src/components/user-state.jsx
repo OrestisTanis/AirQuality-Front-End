@@ -4,7 +4,8 @@ import isJWTExpiredOrNull, {getUsernameFromJWT} from './validate-jwt';
 let listeners = [];
 let state = { 
   isLoggedIn: !isJWTExpiredOrNull(localStorage.token),
-  username: getUsernameFromJWT(localStorage.token)
+  username: JSON.parse(localStorage.getItem("user")) || "",
+  roles: JSON.parse(localStorage.getItem("roles")) || []
  };
 
 const setState = (newState) => {

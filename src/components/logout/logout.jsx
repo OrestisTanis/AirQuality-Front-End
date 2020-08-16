@@ -1,11 +1,20 @@
 import React from 'react';
 import {useHistory} from 'react-router-dom';
+import authService from '../services/authentication-service';
+import useUserState from '../user-state';
+
 
 function LogOut() {
     const history = useHistory();
+    const [userState, setUserState] = useUserState();
 
     function handleSignOut() {
-        localStorage.removeItem("token");
+        // localStorage.removeItem("token");
+        // const path = "/";
+        // history.push(path);
+
+        authService.logout();
+        setUserState({isLoggedIn: false, roles: [], username: ""});
         const path = "/";
         history.push(path);
     }

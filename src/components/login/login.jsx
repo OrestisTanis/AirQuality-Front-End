@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../../shared/css/validation-errors.css';
 import useUserState from '../user-state';
 import { useHistory } from 'react-router-dom';
+import authService from '../services/authentication-service';
 
 function Login() {
     const starStyle = {
@@ -40,31 +41,19 @@ function Login() {
 
     // Gets called only if the form has no errors upon submit.
     // Used by the handler function
-    function doLogin(userInfo) {
-        // Go to the server || dispatch an action
-        axios.post(`http://localhost:8080/authenticate`, userInfo, {
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                //Authorization: 'Bearer ' + token // if you use token
-            }
-        })
-            .then(res => {
-                // Handle successful login
-                // Saving the token in client's local storage
-                localStorage.setItem("token", res.data.token);
-                setUserState(state => ({ ...state, isLoggedIn: true }));
+    async function doLogin(userInfo) {
+            const userDetailsObj = await authService.login(userInfo.username, userInfo.password);
+            console.log(userDetailsObj);
+            if (userDetailsObj){
+                setUserState({isLoggedIn: true, roles: userDetailsObj.roles, username: userDetailsObj.username});
                 const path = "/";
                 history.push(path);
-            }).catch(error => {
-                // Handle invalid credentials
-                if (error.message) {
-                    console.log(error.message);
-                    const errors = {};
-                    errors.invalidCredentials = "Invalid username or password.";
-                    setErrors(errors);
-                }
-            })
+            }
+            else {
+                const errors = {};
+                errors.invalidCredentials = "Invalid username or password.";
+                setErrors(errors);
+            }
     }
 
     return (

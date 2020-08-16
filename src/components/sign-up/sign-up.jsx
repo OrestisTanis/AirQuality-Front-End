@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useHistory } from "react-router-dom";
 import '../../shared/css/validation-errors.css';
+import authService from '../services/authentication-service';
 
 function SignUp() {
     const starStyle = {
@@ -68,23 +69,30 @@ function SignUp() {
         return regex.test(String(name));
     }
 
-    function doSignUp(userInfo) {
+    async function doSignUp(userInfo) {
         // Go to the server || dispatch an action
-        axios.post(`http://localhost:8080/register`, userInfo, {
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                // Authorization: 'Bearer ' + token // if you use token
-            }
-        })
-        .then(res => {
-            console.log(res);
-            console.log(res.data);
+        // axios.post(`http://localhost:8080/register`, userInfo, {
+        //     headers: {
+        //         Accept: 'application/json',
+        //         'Content-Type': 'application/json',
+        //         // Authorization: 'Bearer ' + token // if you use token
+        //     }
+        // })
+        // .then(res => {
+        //     console.log(res);
+        //     console.log(res.data);
+        //     const path = "/registration-success";
+        //     history.push(path);
+        // }).catch(error => {
+        //     console.log(error.message);
+        // })
+        
+        const registered = await authService.register(userInfo);
+        if (registered){
             const path = "/registration-success";
             history.push(path);
-        }).catch(error => {
-            console.log(error.message);
-        })
+            authService.registered = false;
+        }
     }
 
     return (

@@ -4,6 +4,7 @@ import SecondaryFeature from './secondary-feature';
 import Plan from './plan';
 import BackgroundVideo from './background-video';
 import axios from 'axios';
+import planService from '../services/plan-service';
 
 function LandingPage() {
     const [plans, setPlans] = useState([]);
@@ -15,22 +16,17 @@ function LandingPage() {
 
     function getPlanData() {
         // Go to the server || dispatch an action
-        axios.get(`http://localhost:8080/plans`)
+        planService.getAllPlans()
             .then(res => {
                 // Handle successful call
-                console.log(res.data);
                 setPlans(res.data);
             }).catch(error => {
                 // Handle invalid credentials
                 if (error.message) {
                     console.log(error.message);
-                    // const errors = {};
-                    // errors.invalidCredentials = "Invalid username or password.";
-                    // setErrors(errors);
                 }
             })
     }
-
 
     return (
         <>
