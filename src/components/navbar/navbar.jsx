@@ -162,7 +162,7 @@ function Navbar() {
                                                 <li className="btn nav-link" type="button"><Link to="/admin" style={textColor} onClick={toggleNavbar}>Admin</Link></li>
                                                 :
                                                 <>
-                                                    <li className="btn nav-link" type="button"><Link to="/sensor-registration" style={textColor} onClick={toggleNavbar}>Sensor registration</Link></li>
+                                                    <li className="btn nav-link" type="button"><Link to="/sensors" style={textColor} onClick={toggleNavbar}>My Sensors</Link></li>
                                                     <li className="btn nav-link" type="button"><Link to="/cart" style={textColor} onClick={toggleNavbar}>Cart</Link></li>
                                                 </>
                                             }
@@ -184,4 +184,3 @@ function Navbar() {
 
 
 export default Navbar;
-

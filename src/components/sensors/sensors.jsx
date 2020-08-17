@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import SensorService from '../services/sensor-service';
 import useUserState from '../user-state';
 import authService from '../services/authentication-service';
+import {Link} from 'react-router-dom';
+
 
 function Sensors() {
   const padTop = "4.78rem";
@@ -83,7 +85,7 @@ function Sensors() {
                 <td>{item.label}</td>
                 <td>
                   <button type="button" className="btn btn-primary mr-1">Location</button>
-                  <button type="button" className="btn btn-warning mr-1">Data</button>
+                  <button type="button" className="btn btn-warning mr-1"><Link to="/data" style={{ textDecoration: 'none', color: 'white' }}>Data</Link></button>
                 </td>
                 <td>
                   <button type="button" className="btn btn-danger">Delete</button>
@@ -120,26 +122,11 @@ function Sensors() {
                 <th scope="row">{index + 1}</th>
                 <td>{item.productType}</td>
                 <td>
-                  <button type="button" className="btn btn-success mr-1">Register</button>
+                  <button type="button" className="btn btn-success mr-1"><Link to="/sensor-registration" style={{ textDecoration: 'none', color: 'white' }}>Register</Link></button>
                 </td>
               </tr>
             })
           }
-          <tr>
-            <th scope="row">1</th>
-            <td>
-              Co
-            </td>
-            <td>
-              <button type="button" className="btn btn-success mr-1">Register</button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-          </tr>
         </tbody>
       </table>
     </div>

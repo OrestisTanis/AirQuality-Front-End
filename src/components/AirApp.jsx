@@ -49,7 +49,7 @@ function AirApp() {
             {/* {console.log("isLoggedIn: ", userState.isLoggedIn)} */}
             {!userState.isLoggedIn && <Route path="/login" component={Login} />}
             {!userState.isLoggedIn && <Route path="/sign-up" component={SignUp} />}
-            {!userState.isLoggedIn &&  <Route path="/sensor-registration" component={SensorRegistration} />}
+            {userState.isLoggedIn &&  <Route path="/sensor-registration" component={SensorRegistration} />}
             {userState.isLoggedIn &&  <Route path="/sensors" component={Sensors} />}
 
             <Footer></Footer>

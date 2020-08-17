@@ -6,11 +6,13 @@ function ApiUrlService() {
 
     // proceed as normal
     this.API_URL = "http://173.249.63.213:8080/";
-
+    this.GRAFANA_URL = "http://173.249.63.213:3000/";
     this.getApiURL = function() {
         return this.API_URL;
     }
-
+    this.getGrafanaURL = function() {
+        return this.GRAFANA_URL;
+    }
      // cache
 	ApiUrlService.instance = this;
 
