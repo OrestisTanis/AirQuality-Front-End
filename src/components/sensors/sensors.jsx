@@ -84,7 +84,6 @@ function Sensors() {
                 <th scope="row">{index + 1}</th>
                 <td>{item.label}</td>
                 <td>
-                  <button type="button" className="btn btn-primary mr-1">Location</button>
                   <button type="button" className="btn btn-warning mr-1"><Link to="/data" style={{ textDecoration: 'none', color: 'white' }}>Data</Link></button>
                 </td>
                 <td>
@@ -122,7 +121,7 @@ function Sensors() {
                 <th scope="row">{index + 1}</th>
                 <td>{item.productType}</td>
                 <td>
-                  <button type="button" className="btn btn-success mr-1"><Link to="/sensor-registration" style={{ textDecoration: 'none', color: 'white' }}>Register</Link></button>
+                  <button type="button" className="btn btn-success mr-1"><Link to={"/sensor-registration/"+item.soldSensorId} style={{ textDecoration: 'none', color: 'white' }}>Register</Link></button>
                 </td>
               </tr>
             })

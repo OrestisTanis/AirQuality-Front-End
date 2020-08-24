@@ -21,8 +21,8 @@ function SensorService() {
         return axios.get(this.API_URL + `sensorlocation/${username}`);
     }
 
-    this.getCurrentPm = function(){
-      return axios.get(this.API_URL + `current`);
+    this.getCurrentPm = function() {
+        return axios.get(this.API_URL + `current`);
     }
 
     this.getSensorById = function(id) {
@@ -30,9 +30,13 @@ function SensorService() {
         return axios.get(this.API_URL + `Sensors/${id}`);
     }
 
+    this.registerSensor = function(sensorToRegister) {
+        return axios.post(this.API_URL + `sensor-registration`, sensorToRegister);
+    }
+
     this.updateSensor = function(Sensor) {
         // return axios.get(this.API_URL + `Sensors/${id}`, { headers: authHeader() });
-        return axios.put(this.API_URL + `Sensors/${Sensor.id}`, Sensor );
+        return axios.put(this.API_URL + `Sensors/${Sensor.id}`, Sensor);
     }
 
     this.deleteSensorById = function(SensorId) {
@@ -48,10 +52,10 @@ function SensorService() {
     }
 
     // cache
-	SensorService.instance = this;
+    SensorService.instance = this;
 
-	// implicit return
-	return this;
+    // implicit return
+    return this;
 }
 
 export default new SensorService();
