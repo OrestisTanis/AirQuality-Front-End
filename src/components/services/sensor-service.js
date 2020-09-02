@@ -21,6 +21,12 @@ function SensorService() {
         return axios.get(this.API_URL + `sensorlocation/${username}`);
     }
 
+    this.deleteBySensorLocationId = function(sensorLocationId) {
+        // return axios.get(this.API_URL + `Sensors/${id}`, { headers: authHeader() });
+        console.log(sensorLocationId);
+        return axios.delete(this.API_URL + `sensorlocation/${sensorLocationId}`);
+    }
+
     this.getCurrentPm = function() {
         return axios.get(this.API_URL + `current`);
     }
@@ -37,11 +43,6 @@ function SensorService() {
     this.updateSensor = function(Sensor) {
         // return axios.get(this.API_URL + `Sensors/${id}`, { headers: authHeader() });
         return axios.put(this.API_URL + `Sensors/${Sensor.id}`, Sensor);
-    }
-
-    this.deleteSensorById = function(SensorId) {
-        // return axios.get(this.API_URL + `Sensors/${id}`, { headers: authHeader() });
-        return axios.delete(this.API_URL + `Sensors/${SensorId}`);
     }
 
     this.addSensor = function(Sensor) {
