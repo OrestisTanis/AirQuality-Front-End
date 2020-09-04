@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import '../../shared/css/validation-errors.css';
+import authService from '../services/authentication-service';
 
 function SignUp() {
     const starStyle = {
         color: "rgba(253, 17, 17, 0.7)"
     };
-
+    const history = useHistory();
     const [errors, setErrors]=useState({});
 
     function handleSignUp(event) {
@@ -68,21 +69,30 @@ function SignUp() {
         return regex.test(String(name));
     }
 
-    function doSignUp(userInfo) {
+    async function doSignUp(userInfo) {
         // Go to the server || dispatch an action
-        axios.post(`http://localhost:8080/register`, userInfo, {
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                // Authorization: 'Bearer ' + token // if you use token
-            }
-        })
-        .then(res => {
-            console.log(res);
-            console.log(res.data);
-        }).catch(error => {
-            console.log(error.message);
-        })
+        // axios.post(`http://localhost:8080/register`, userInfo, {
+        //     headers: {
+        //         Accept: 'application/json',
+        //         'Content-Type': 'application/json',
+        //         // Authorization: 'Bearer ' + token // if you use token
+        //     }
+        // })
+        // .then(res => {
+        //     console.log(res);
+        //     console.log(res.data);
+        //     const path = "/registration-success";
+        //     history.push(path);
+        // }).catch(error => {
+        //     console.log(error.message);
+        // })
+        
+        const registered = await authService.register(userInfo);
+        if (registered){
+            const path = "/registration-success";
+            history.push(path);
+            authService.registered = false;
+        }
     }
 
     return (

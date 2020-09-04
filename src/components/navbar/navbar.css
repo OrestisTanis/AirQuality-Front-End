@@ -24,10 +24,35 @@ button.navbar-toggler:focus {
     outline: none;
     outline: none;
 }
+.navbar-toggler .line{
+    width: 100%;
+    float: left;
+    height: 0.18rem;
+    margin-bottom: 5px;
+}
 .navbar-brand{
     padding-bottom: 0.5rem !important;
 }
 #sign-out-button {
   text-decoration: none;
+}
+.nav-link, .nav-link > * {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    font-weight: 500;
+    margin-top:0.2rem;
+    margin-bottom:0.2rem;
+    position:relative;
+}
+#brand-name {
+    position: relative;
+    bottom: 0.16rem;
+}
+.nav-link > *:hover, .nav-link > *:active {
+    text-decoration: underline;
+}
+
+.nav-item > a:hover, .nav-item > a:active {
+    text-decoration: underline;
 }
 

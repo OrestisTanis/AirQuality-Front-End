@@ -6,7 +6,6 @@ function PathWatcher(){
     const [pathName, setPathName ] = usePathNameState();
     const history = useHistory();
 
-
     // Executed each time the url changes
     useEffect(() => {
         return history.listen((location) => {

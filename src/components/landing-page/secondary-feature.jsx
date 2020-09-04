@@ -5,11 +5,11 @@ function SecondaryFeature(props) {
     return (
         <div className={props.className}>
             <h2 className="mb-5 pb-2">High Quality Data Visualization</h2>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-            Dicta consectetur eos accusamus non. Obcaecati ab,
-            necessitatibus esse culpa aspernatur cupiditate.
-            Necessitatibus blanditiis quidem vel cum ullam
-                    dolores amet eveniet vitae?</p>
+            <p className="text-justify">Powered by Grafana, our application provides high quality data visualization and analytics
+               to our premium users for all types of sensors. 
+               With our interactive visualization, you can take it a step further
+                and get the data into charts and graphs for more detailed observations.
+            </p>
         </div>
 
     )

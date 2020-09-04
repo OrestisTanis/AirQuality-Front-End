@@ -39,8 +39,8 @@ function Footer() {
                             <h4>Connect with AirSense</h4>
                         </div>
                         <div className="col-4 offset-5">
-                            { iconsArr.map( icon => {
-                                return <SocialMediaIcon icon={icon} className="ml-3"/>
+                            { iconsArr.map( (icon,index) => {
+                                return <SocialMediaIcon icon={icon} key={index} className="ml-3"/>
                             })}
                         </div>
                     </div>

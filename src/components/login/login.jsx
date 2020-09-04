@@ -1,17 +1,18 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import '../../shared/css/validation-errors.css';
 import useUserState from '../user-state';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import authService from '../services/authentication-service';
 
-function Login(){
+function Login() {
     const starStyle = {
         color: "rgba(253, 17, 17, 0.7)"
     };
     // The user's global state
     const [userState, setUserState] = useUserState();
     // Private state used for error handling
-    const [errors, setErrors]=useState({});
+    const [errors, setErrors] = useState({});
     let history = useHistory();
 
     // Handler for the form submit event
@@ -40,33 +41,42 @@ function Login(){
 
     // Gets called only if the form has no errors upon submit.
     // Used by the handler function
-    function doLogin(userInfo) {
-        // Go to the server || dispatch an action
-        axios.post(`http://localhost:8080/authenticate`, userInfo, {
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                //Authorization: 'Bearer ' + token // if you use token
-            }
-        })
-        .then(res => {
-            // Handle successful login
-            console.log(res);
-            console.log(res.data);
-            // Saving the token in client's local storage
-            localStorage.setItem("token", res.data.token);
-            setUserState(state => ({...state, isLoggedIn: true}));
-            history.goBack();
-            
-        }).catch(error => {
-            console.log(error);
-            // Handle invalid credentials
-            if (error.message){
-                const errors = {};
-                errors.invalidCredentials = "Invalid username or password.";
-                setErrors(errors);
-            }
-        })
+    async function doLogin(userInfo) {
+        const result = await authService.login(userInfo.username, userInfo.password)
+        console.log(result);
+        if (result) {
+            setUserState({isLoggedIn: true, roles: result.roles, username: result.username});
+            const path = "/";
+            history.push(path);
+        }
+        else {
+            const errors = {};
+            errors.invalidCredentials = "Invalid username or password.";
+            setErrors(errors);
+        }
+        // .then((res)=>{
+        //     setUserState({isLoggedIn: true, roles: res.roles, username: res.username});
+        //     const path = "/";
+        //     history.push(path);
+        // })
+        // .catch((err)=>{
+        //     const errors = {};
+        //     errors.invalidCredentials = "Invalid username or password.";
+        //     setErrors(errors);
+        // });
+
+        // const userDetailsObj = await authService.login(userInfo.username, userInfo.password)
+        // console.log(userDetailsObj);
+        // if (userDetailsObj){
+        //     setUserState({isLoggedIn: true, roles: userDetailsObj.roles, username: userDetailsObj.username});
+        //     const path = "/";
+        //     history.push(path);
+        // }
+        // else {
+        //     const errors = {};
+        //     errors.invalidCredentials = "Invalid username or password.";
+        //     setErrors(errors);
+        // }
     }
 
     return (
@@ -95,7 +105,7 @@ function Login(){
                                     </small>
                                 </div>
                                 <div className={(errors.invalidCredentials ? "show" : "hide") + " signup-errors text-center"}>
-                                    {errors.invalidCredentials + ""} 
+                                    {errors.invalidCredentials + ""}
                                 </div>
                             </form>
                             <div className="d-flex justify-content-center">
@@ -105,7 +115,6 @@ function Login(){
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }

@@ -7,7 +7,7 @@ function CompanyFeature2(props){
     <div className="company-feature mb-5">
       <div className="mb-0 " style={{padding:'1rem', backgroundColor:'#EEEEEE', borderTopLeftRadius:'50%', borderTopRightRadius:'50%'}}>
         <div className="shadow rounded-circle" style={{ width: '20rem', height: '20rem', overflow: 'none'}}>
-          <img className="rounded-circle" src={img} style={{ height: '100%', width: '100%', objectFit:'cover'}} />
+          <img className="rounded-circle" src={img} style={{ height: '100%', width: '100%', objectFit:'cover'}} alt=""/>
         </div>
       </div>
       <div className='pt-0 mt-0' style={{height:'20rem', backgroundColor:'#EEEEEE'}}>
