@@ -78,8 +78,8 @@ function Map() {
                     {CurrentData.map(sensor => {
                         return <Marker position={[sensor.lat, sensor.lon]}>
                             <Popup>
-                                <table class="table">
-                                    <thead class="thead-dark">
+                                <table className="table">
+                                    <thead className="thead-dark">
                                         <tr>
                                             <th scope="col" className="text-center" colSpan="3">Current values</th>
                                         </tr>

@@ -41,19 +41,31 @@ function Login() {
 
     // Gets called only if the form has no errors upon submit.
     // Used by the handler function
-    async function doLogin(userInfo) {
-            const userDetailsObj = await authService.login(userInfo.username, userInfo.password);
-            console.log(userDetailsObj);
-            if (userDetailsObj){
-                setUserState({isLoggedIn: true, roles: userDetailsObj.roles, username: userDetailsObj.username});
-                const path = "/";
-                history.push(path);
-            }
-            else {
-                const errors = {};
-                errors.invalidCredentials = "Invalid username or password.";
-                setErrors(errors);
-            }
+    function doLogin(userInfo) {
+        authService.login(userInfo.username, userInfo.password)
+        .then((res)=>{
+            setUserState({isLoggedIn: true, roles: res.roles, username: res.username});
+            const path = "/";
+            history.push(path);
+        })
+        .catch((err)=>{
+            const errors = {};
+            errors.invalidCredentials = "Invalid username or password.";
+            setErrors(errors);
+        });
+
+        // const userDetailsObj = await authService.login(userInfo.username, userInfo.password)
+        // console.log(userDetailsObj);
+        // if (userDetailsObj){
+        //     setUserState({isLoggedIn: true, roles: userDetailsObj.roles, username: userDetailsObj.username});
+        //     const path = "/";
+        //     history.push(path);
+        // }
+        // else {
+        //     const errors = {};
+        //     errors.invalidCredentials = "Invalid username or password.";
+        //     setErrors(errors);
+        // }
     }
 
     return (
