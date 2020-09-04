@@ -32,9 +32,8 @@ function AuthService() {
     }
 
     // login
-    this.login = function(username, password) {
-        return new Promise((resolve, reject) =>
-        axios.post(this.API_URL + "authenticate", {
+    this.login = async function(username, password) {
+        return await axios.post(this.API_URL + "authenticate", {
                 username,
                 password
             })
@@ -46,13 +45,13 @@ function AuthService() {
                     (response.data.roles).forEach((role)=>{
                         this.roles.push(role);
                     })
-                    resolve({username: username, roles: this.roles});
+                    return {username: username, roles: this.roles};
                 }
             })
             .catch(function (response) {
                 //handle error
-                resolve(null);
-            }));
+                return null;
+            });
     }
 
     // logout

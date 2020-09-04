@@ -4,6 +4,8 @@ import useUserState from '../user-state';
 import authService from '../services/authentication-service';
 import {Link} from 'react-router-dom';
 import {useHistory} from 'react-router-dom';
+import './sensors.css';
+import Loader from 'react-loader-spinner';
 
 function Sensors() {
     const padTop = "4.78rem";
@@ -12,6 +14,8 @@ function Sensors() {
     const [errors, setErrors] = useState({});
     const username = authService.getCurrentUser();
     const [registeredAddr, setRegisteredAddr] = useState([]);
+    const [loadingRegistered, setLoadingRegistered] = useState(true);
+    const [loadingNonRegistered, setLoadingNonRegistered] = useState(true);
 
     function getNonRegistered() {
         SensorService.getNonRegisteredSensorsByUsername(username).then(res => {
@@ -20,7 +24,7 @@ function Sensors() {
             res.data.map(sensor => {
                 fetchedSensors.push(sensor);
             });
-            setNonRegistered(fetchedSensors);
+            setNonRegistered(fetchedSensors, setLoadingNonRegistered(false));
         }).catch(error => {
             // Handle errors
             if (error.message) {
@@ -40,19 +44,15 @@ function Sensors() {
             const getData = async () => {
                 return Promise.all(res.data.map(async (sensor, index) => {
                     // IF to be deleted - just keep the code inside, it was for testing purposes
-
-                        fetchedSensors.push(sensor);
-                        const sensorAddress = await getRegisteredSensorAddress(sensor)
-                        tempAddrArr.push(sensorAddress);
-                    
+                    fetchedSensors.push(sensor);
+                    const sensorAddress = await getRegisteredSensorAddress(sensor)
+                    tempAddrArr.push(sensorAddress);
                 }))
             }
-
             getData().then(() => {
                 setRegisteredAddr(tempAddrArr);
-                setRegistered(fetchedSensors);
+                setRegistered(fetchedSensors,  setLoadingRegistered(false));
             })
-
         }).catch(error => {
             // Handle errors
             if (error.message) {
@@ -61,6 +61,7 @@ function Sensors() {
                 setErrors(errors);
             }
         });
+       
     }
 
     async function getRegisteredSensorAddress(fetchedRegisteredSensor) {
@@ -72,6 +73,7 @@ function Sensors() {
         });
         return result;
     }
+
     useEffect(() => {
         getNonRegistered();
         getRegistered();
@@ -79,44 +81,70 @@ function Sensors() {
 
     function handleDelete(sensorLocationId) {
         alert("All sensor measurements will be lost!\r\nProceed?");
-        SensorService.deleteBySensorLocationId(sensorLocationId).then(() => {
-            console.log({sensorLocationId: sensorLocationId});
+        SensorService.deleteBySensorLocationId(sensorLocationId)
+        .then(() => {
+            let sensorToDelete;
+            const filteredRegistered = registered.filter((sensor)=>{
+                if (sensor.sensorLocationId !== sensorLocationId){
+                    return true;
+                }
+                else{
+                    sensorToDelete = {...sensor};
+                    console.log(sensorToDelete);
+                    return false;
+                }
+            })
+            setRegistered(filteredRegistered);
+            const tempNonRegistered = [...nonRegistered, sensorToDelete ];
+            setNonRegistered(tempNonRegistered);
         }).catch((err) => {
             console.log(err);
-        });
-        window.location.reload(true);
+        });      
+
+        
+    }
+
+    const spinner = () => {
+        return  <Loader
+            type="Oval"
+            color="#2d3a49"
+            height={100}
+            width={100}
+            timeout={3000}
+            className="mt-3 mb-3 text-center"
+        />        
     }
 
     return (<div style={{
             paddingTop: padTop
         }}>
-        <h2 className="text-center">
+        <h2 className="text-center pt-4 mb-4">
             Registered sensors
         </h2>
-        <div className="container w-50">
-            <table className="table">
+        <div className="container">
+            <table className="table table-responsive-sm">
                 <thead>
                     <tr>
                         <th style={{
-                                width: '30%'
+                                width: '20%'
                             }}>#</th>
                         <th style={{
-                                width: '30%'
+                                width: '20%'
                             }}>Location</th>
                         <th style={{
-                                width: '30%'
+                                width: '20%'
                             }}>Label</th>
                         <th style={{
-                                width: '30%'
+                                width: '20%'
                             }}>View</th>
                         <th style={{
-                                width: '30%'
+                                width: '20%'
                             }}>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {
-                        registered.map((item, index) => {
+                    {  
+                        !loadingRegistered && registered.map((item, index) => {
                             return <tr key={item.sensorLocationId}>
                                 <th scope="row">{index + 1}</th>
                                 <td>
@@ -124,7 +152,7 @@ function Sensors() {
                                 </td>
                                 <td>{item.label}</td>
                                 <td>
-                                    <button type="button" className="btn btn-warning mr-1">
+                                    <button type="button" className="btn btn-warning btn-block mr-1">
                                         <Link to="/data" style={{
                                                 textDecoration: 'none',
                                                 color: 'white'
@@ -132,45 +160,50 @@ function Sensors() {
                                     </button>
                                 </td>
                                 <td>
-                                    <button type="button" className="btn btn-danger" onClick={() => handleDelete(item.sensorLocationId)}>Delete</button>
+                                    <button type="button" className="btn btn-block btn-danger" onClick={() => handleDelete(item.sensorLocationId)}>Delete</button>
                                 </td>
                             </tr>
                         })
                     }
                 </tbody>
+               
             </table>
+            {loadingRegistered &&
+                spinner()
+            }
         </div>
-        <h2 className="text-center">
+        
+        <h2 className="text-center mb-4 mt-4">
             Non registered Sensors
         </h2>
 
-        <div className="container w-50">
-            <table className="table">
+        <div className="container">
+            <table className="table table-responsive-sm" >
                 <thead>
                     <tr>
                         <th style={{
-                                width: '30%'
+                                width: '25%'
                             }}>#</th>
                         <th style={{
-                                width: '30%'
+                                width: '25%'
                             }}>Sensor ID</th>
                         <th style={{
-                                width: '30%'
+                                width: '25%'
                             }}>Type</th>
                         <th style={{
-                                width: '30%'
+                                width: '25%'
                             }}>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {
-                        nonRegistered.map((item, index) => {
+                    { 
+                        !loadingNonRegistered && nonRegistered.map((item, index) => {
                             return <tr key={item.soldSensorId}>
                                 <th scope="row">{index + 1}</th>
                                 <td>{item.soldSensorId}</td>
                                 <td>{item.productType}</td>
                                 <td>
-                                    <button type="button" className="btn btn-success mr-1">
+                                    <button type="button" className="btn btn-success mr-1 btn-block">
                                         <Link to={"/sensor-registration/" + item.soldSensorId} style={{
                                                 textDecoration: 'none',
                                                 color: 'white'
@@ -182,6 +215,9 @@ function Sensors() {
                     }
                 </tbody>
             </table>
+            {   loadingNonRegistered &&  
+                spinner()
+            }
         </div>
     </div>)
 }

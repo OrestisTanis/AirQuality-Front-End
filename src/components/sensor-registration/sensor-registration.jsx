@@ -32,21 +32,21 @@ function SensorRegistration() {
     // CHAT
     useEffect(() => {
         getGeolocation();
-        const chat = document.getElementById('userlike');
-        var script;
-        if (chat) {
-            chat.classList.remove('d-none');
-        } else {
-            script = document.createElement('script');
-            script.src = "https://userlike-cdn-widgets.s3-eu-west-1.amazonaws.com/881d3b53a69dd16d6ffc7bcdbc10abdda9e12423c56b349d377f7fd6f12d2709.js";
-            script.async = true;
-            document.body.appendChild(script);
-        }
-        return (() => {
-            const chat = document.getElementById('userlike');
-            //document.body.removeChild(script);
-            chat.classList.add('d-none');
-        })
+        // const chat = document.getElementById('userlike');
+        // var script;
+        // if (chat) {
+        //     chat.classList.remove('d-none');
+        // } else {
+        //     script = document.createElement('script');
+        //     script.src = "https://userlike-cdn-widgets.s3-eu-west-1.amazonaws.com/881d3b53a69dd16d6ffc7bcdbc10abdda9e12423c56b349d377f7fd6f12d2709.js";
+        //     script.async = true;
+        //     document.body.appendChild(script);
+        // }
+        // return (() => {
+        //     const chat = document.getElementById('userlike');
+        //     //document.body.removeChild(script);
+        //     chat.classList.add('d-none');
+        // })
     }, []);
 
     function getSoldSensorId() {
