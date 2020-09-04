@@ -11,6 +11,7 @@ function Sensors() {
     const [registered, setRegistered] = useState([]);
     const [errors, setErrors] = useState({});
     const username = authService.getCurrentUser();
+    const [registeredAddr, setRegisteredAddr] = useState([]);
 
     function getNonRegistered() {
         SensorService.getNonRegisteredSensorsByUsername(username).then(res => {
@@ -29,14 +30,29 @@ function Sensors() {
             }
         });
     }
+
     function getRegistered() {
-        SensorService.getRegisteredSensorLocationsByUsername(username).then(res => {
+        SensorService.getRegisteredSensorLocationsByUsername(username).then(async res => {
             // Handle successful fetch of data
             const fetchedSensors = [];
-            res.data.map(sensor => {
-                fetchedSensors.push(sensor);
-            });;
-            setRegistered(fetchedSensors);
+            const tempAddrArr = [];
+
+            const getData = async () => {
+                return Promise.all(res.data.map(async (sensor, index) => {
+                    // IF to be deleted - just keep the code inside, it was for testing purposes
+
+                        fetchedSensors.push(sensor);
+                        const sensorAddress = await getRegisteredSensorAddress(sensor)
+                        tempAddrArr.push(sensorAddress);
+                    
+                }))
+            }
+
+            getData().then(() => {
+                setRegisteredAddr(tempAddrArr);
+                setRegistered(fetchedSensors);
+            })
+
         }).catch(error => {
             // Handle errors
             if (error.message) {
@@ -46,18 +62,26 @@ function Sensors() {
             }
         });
     }
+
+    async function getRegisteredSensorAddress(fetchedRegisteredSensor) {
+        let result = "";
+        await SensorService.getAddressFromLatLng(fetchedRegisteredSensor).then((res) => {
+            result = res.data.results[0].formatted.slice();
+        }).catch(() => {
+            result = fetchedRegisteredSensor.lat + " " + fetchedRegisteredSensor.lon
+        });
+        return result;
+    }
     useEffect(() => {
         getNonRegistered();
         getRegistered();
     }, []);
-    
+
     function handleDelete(sensorLocationId) {
         alert("All sensor measurements will be lost!\r\nProceed?");
-        SensorService.deleteBySensorLocationId(sensorLocationId)
-        .then(()=>{
+        SensorService.deleteBySensorLocationId(sensorLocationId).then(() => {
             console.log({sensorLocationId: sensorLocationId});
-        })
-        .catch((err)=>{
+        }).catch((err) => {
             console.log(err);
         });
         window.location.reload(true);
@@ -78,6 +102,9 @@ function Sensors() {
                             }}>#</th>
                         <th style={{
                                 width: '30%'
+                            }}>Location</th>
+                        <th style={{
+                                width: '30%'
                             }}>Label</th>
                         <th style={{
                                 width: '30%'
@@ -92,6 +119,9 @@ function Sensors() {
                         registered.map((item, index) => {
                             return <tr key={item.sensorLocationId}>
                                 <th scope="row">{index + 1}</th>
+                                <td>
+                                    <a>{registeredAddr[index]}</a>
+                                </td>
                                 <td>{item.label}</td>
                                 <td>
                                     <button type="button" className="btn btn-warning mr-1">
@@ -102,7 +132,7 @@ function Sensors() {
                                     </button>
                                 </td>
                                 <td>
-                                    <button type="button" className="btn btn-danger" onClick={()=>handleDelete(item.sensorLocationId)}>Delete</button>
+                                    <button type="button" className="btn btn-danger" onClick={() => handleDelete(item.sensorLocationId)}>Delete</button>
                                 </td>
                             </tr>
                         })
