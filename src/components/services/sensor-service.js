@@ -2,6 +2,8 @@ import axios from 'axios';
 import authHeader from './auth-header';
 import apiUrlService from './api-url-service';
 
+const OPENCAGE_API_KEY = "f838dfbca8dd4dd6b961bb523aaf5ba6";
+
 function SensorService() {
     // do we have an existing instance?
     if (typeof SensorService.instance === 'object') {
@@ -51,7 +53,7 @@ function SensorService() {
         console.log(Sensor);
         return axios.post(this.API_URL + `Sensors`, Sensor);
     }
-    
+
     this.getAddressFromLatLng = function (sensor) {
           return axios.get(`https://api.opencagedata.com/geocode/v1/json?q=${sensor.lat}+${sensor.lon}&key=${OPENCAGE_API_KEY}`);
       }
