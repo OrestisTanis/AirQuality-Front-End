@@ -51,7 +51,10 @@ function SensorService() {
         console.log(Sensor);
         return axios.post(this.API_URL + `Sensors`, Sensor);
     }
-
+    
+    this.getAddressFromLatLng = function (sensor) {
+          return axios.get(`https://api.opencagedata.com/geocode/v1/json?q=${sensor.lat}+${sensor.lon}&key=${OPENCAGE_API_KEY}`);
+      }
     // cache
     SensorService.instance = this;
 
