@@ -36,11 +36,7 @@
     display:flex;
     justify-items:center;
 }
-.cart-item--btn-success:hover,
-.cart-item--btn-success:active,
-.cart-item--btn-success:focus{
-   background-color:red;
-}
+
 .sum-total-price{
     position:absolute;
     transform:translate(0, 0);
