@@ -5,7 +5,7 @@ function ApiUrlService() {
     }
 
     // proceed as normal
-    this.API_URL = "http://localhost:8080/";
+    this.API_URL = "http://173.249.63.213:8080/";
     this.GRAFANA_URL = "http://173.249.63.213:3000/";
     this.getApiURL = function() {
         return this.API_URL;
