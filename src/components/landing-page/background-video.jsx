@@ -11,7 +11,7 @@ function BackgroundVideo(props) {
         height = document.getElementById("image-poster").offsetHeight;
         if (height === 0) height = document.getElementById('video-bg').offsetHeight;
         const topPos = height;
-        console.log(topPos);
+        // console.log(topPos);
         window.scrollTo(0, topPos + 3);
     }
     return (

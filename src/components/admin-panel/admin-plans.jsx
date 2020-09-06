@@ -27,7 +27,7 @@ function AdminPlans() {
             }).catch(error => {
                 // Handle errors
                 if (error.message) {
-                    console.log(error.message);
+                    // console.log(error.message);
                 }
             })
     }

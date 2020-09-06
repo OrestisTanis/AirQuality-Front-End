@@ -30,15 +30,15 @@
     transform:translate(0, 0);
     left: 10%;
 }
-.btn-success{
+.cart-item--btn-success{
     box-shadow:none!important;
     width:40px;
     display:flex;
     justify-items:center;
 }
-.btn-success:hover,
-.btn-success:active,
-.btn-success:focus{
+.cart-item--btn-success:hover,
+.cart-item--btn-success:active,
+.cart-item--btn-success:focus{
    background-color:red;
 }
 .sum-total-price{

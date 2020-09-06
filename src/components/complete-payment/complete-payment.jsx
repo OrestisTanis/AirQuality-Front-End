@@ -9,7 +9,7 @@ function CompletePayment() {
   $("#myModal").modal('show');
   });
 
-  console.log(window.location.search);
+  // console.log(window.location.search);
   let queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const paymentId = urlParams.get('paymentId');
@@ -21,12 +21,12 @@ function CompletePayment() {
 
       axios.post(`http://localhost:8080/paypal/complete/payment?paymentId=${paymentId}&payerId=${payerID}`)
           .then(res => {
-            console.log("Payment success..");
-            console.log(res.data);
+            // console.log("Payment success..");
+            // console.log(res.data);
           }).catch(error => {
               // Handle invalid credentials
               if (error.message) {
-                  console.log(error.message);
+                  // console.log(error.message);
               }
           })
   }

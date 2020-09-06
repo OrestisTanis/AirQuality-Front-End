@@ -78,15 +78,15 @@ function Order(){
 
       axios.post(`http://localhost:8080/paypal/make/payment?sum=${finalSum}`)
           .then(res => {
-            console.log("Payment success..");
-            console.log(finalSum);
-            console.log(res.data);
+            // console.log("Payment success..");
+            // console.log(finalSum);
+            // console.log(res.data);
             const redirectUrl = res.data.redirect_url;
             window.location.href = redirectUrl;
           }).catch(error => {
               // Handle invalid credentials
               if (error.message) {
-                  console.log(error.message);
+                  // console.log(error.message);
                   // const errors = {};
                   // errors.invalidCredentials = "Invalid username or password.";
                   // setErrors(errors);

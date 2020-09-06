@@ -44,7 +44,7 @@ function Login() {
     async function doLogin(userInfo) {
         authService.login(userInfo.username, userInfo.password)
         .then(response=>{
-            console.log(response.data);
+            // console.log(response.data);
             if (response.data.token) {
                 localStorage.setItem("user", JSON.stringify(response.data.username));
                 localStorage.setItem("token", JSON.stringify(response.data.token));
@@ -55,7 +55,7 @@ function Login() {
             }
         })
         .catch((err)=>{
-            console.log(err);
+            // console.log(err);
             const errors = {};
             errors.invalidCredentials = "Invalid username or password.";
             setErrors(errors);

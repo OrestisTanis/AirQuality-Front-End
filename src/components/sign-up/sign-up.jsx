@@ -14,7 +14,7 @@ function SignUp() {
     function handleSignUp(event) {
         event.preventDefault();
         const elements = event.currentTarget.elements;
-        console.log(elements);
+        // console.log(elements);
         const firstName = elements.firstName.value;
         const lastName = elements.lastName.value;
         const username = elements.username.value;
@@ -53,7 +53,7 @@ function SignUp() {
         else if (formData.password !== formData.repeatPassword) errors.repeatPassword = "Passwords don't match";
         // Terms & Conditions
         if (!formData.agreeTerms) errors.agreeTerms = "Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy";
-        console.log(errors);
+        // console.log(errors);
         return errors;
     }
     function validateEmail(email) {

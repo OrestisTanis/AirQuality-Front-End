@@ -20,12 +20,12 @@ function SensorRegistration() {
     function getGeolocation() {
         return (navigator.geolocation.getCurrentPosition(function(position) {
             setUserPosition([position.coords.latitude, position.coords.longitude]);
-            console.log(userPosition)
+            // console.log(userPosition)
         }))
     }
 
     function handleClick(e) {
-        console.log(e.latlng);
+        // console.log(e.latlng);
         return setMarkerPosition(e.latlng);
     }
 
@@ -57,13 +57,13 @@ function SensorRegistration() {
 
     function handleSubmit(e) {
         const sensorLabel = e.target.sensorLabel.value
-        console.log(sensorLabel)
+        // console.log(sensorLabel)
         SensorService.registerSensor({soldSensorId: getSoldSensorId(), label: sensorLabel, lat: markerPosition.lat, lon: markerPosition.lng})
         .then(()=>{
-            console.log({soldSensorId: getSoldSensorId(), label: sensorLabel, lat: markerPosition.lat, lon: markerPosition.lng});
+            // console.log({soldSensorId: getSoldSensorId(), label: sensorLabel, lat: markerPosition.lat, lon: markerPosition.lng});
         })
         .catch((err)=>{
-            console.log(err);
+            // console.log(err);
         });
         e.preventDefault();
         history.push("/sensors");

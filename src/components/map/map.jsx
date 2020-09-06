@@ -22,7 +22,7 @@ function Map() {
     function getGeolocation() {
         return (navigator.geolocation.getCurrentPosition(function (position) {
             setUserPosition([position.coords.latitude, position.coords.longitude]);
-            console.log(userPosition)
+            // console.log(userPosition)
         }))
     }
 
@@ -50,14 +50,14 @@ function Map() {
         SensorService.getCurrentPm()
             .then(res => {
                 // Handle successful fetch of data
-                console.log(res.data);
+                // console.log(res.data);
                 const fetchedCurrentData = [];
                 res.data.map(sensorLocation => {
                     fetchedCurrentData.push(sensorLocation);
                 });
                 setCurrentData(fetchedCurrentData);
             }).catch(error => {
-                console.log(error);
+                // console.log(error);
                 // Handle errors
                 if (error.message) {
                     const errors = {};

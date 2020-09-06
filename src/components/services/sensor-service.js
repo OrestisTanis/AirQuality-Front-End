@@ -25,7 +25,7 @@ function SensorService() {
 
     this.deleteBySensorLocationId = function(sensorLocationId) {
         // return axios.get(this.API_URL + `Sensors/${id}`, { headers: authHeader() });
-        console.log(sensorLocationId);
+        // console.log(sensorLocationId);
         return axios.delete(this.API_URL + `sensorlocation/${sensorLocationId}`);
     }
 
@@ -49,8 +49,8 @@ function SensorService() {
 
     this.addSensor = function(Sensor) {
         // return axios.get(this.API_URL + `Sensors/${id}`, { headers: authHeader() });
-        console.log("BEFORE SENDING TO SERVER FOR POST");
-        console.log(Sensor);
+        // console.log("BEFORE SENDING TO SERVER FOR POST");
+        // console.log(Sensor);
         return axios.post(this.API_URL + `Sensors`, Sensor);
     }
 

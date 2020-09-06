@@ -33,8 +33,8 @@ function ProductService() {
 
     this.addProduct = function(product) {
         // return axios.get(this.API_URL + `products/${id}`, { headers: authHeader() });
-        console.log("BEFORE SENDING TO SERVER FOR POST");
-        console.log(product);
+        // console.log("BEFORE SENDING TO SERVER FOR POST");
+        // console.log(product);
         return axios.post(this.API_URL + `products`, product);
     }
 

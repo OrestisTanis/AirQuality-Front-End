@@ -50,7 +50,7 @@ function AdminProduct() {
             $('#adminProductCreateEditModal').modal('show')
         }
         else {
-            console.log("ERRORS");
+            // console.log("ERRORS");
         }
     }
 
@@ -117,7 +117,7 @@ function AdminProduct() {
 
     function getProductData() {
         const id = pathname.slice(pathname.lastIndexOf("/") + 1);
-        console.log(id);
+        // console.log(id);
         // Go to the server || dispatch an action
         productService.getProductById(id)
             .then(res => {
@@ -127,7 +127,7 @@ function AdminProduct() {
             }).catch(error => {
                 // Handle errors
                 if (error.message) {
-                    console.log(error.message);
+                    // console.log(error.message);
                 }
             })
     }
@@ -141,7 +141,7 @@ function AdminProduct() {
             }).catch(error => {
                 // Handle errors
                 if (error.message) {
-                    console.log(error.message);
+                    // console.log(error.message);
                 }
             })
             
