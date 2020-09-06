@@ -17,7 +17,7 @@ function BackgroundVideo(props) {
     return (
         <>
             <video id="video-bg" poster={poster} autoPlay muted loop>
-                <source src={"https://www.dropbox.com/s/5rq2e01773kpx0p/city.mp4?raw=1"} type="video/mp4" />
+                <source src={vid} type="video/mp4" />
             </video>
             <div className="d-md-none">
                 <img id="image-poster" src={poster} alt="" />
