@@ -32,26 +32,26 @@ function AuthService() {
     }
 
     // login
-    this.login = async function(username, password) {
-        return await axios.post(this.API_URL + "authenticate", {
+    this.login = function(username, password) {
+        return axios.post(this.API_URL + "authenticate", {
                 username,
                 password
             })
-            .then((response) => {
-                if (response.data.token) {
-                    localStorage.setItem("user", JSON.stringify(response.data.username));
-                    localStorage.setItem("token", JSON.stringify(response.data.token));
-                    localStorage.setItem("roles", JSON.stringify(response.data.roles));
-                    (response.data.roles).forEach((role)=>{
-                        this.roles.push(role);
-                    })
-                    return {username: username, roles: this.roles};
-                }
-            })
-            .catch(function (response) {
-                //handle error
-                return null;
-            });
+            // .then((response) => {
+            //     if (response.data.token) {
+            //         localStorage.setItem("user", JSON.stringify(response.data.username));
+            //         localStorage.setItem("token", JSON.stringify(response.data.token));
+            //         localStorage.setItem("roles", JSON.stringify(response.data.roles));
+            //         (response.data.roles).forEach((role)=>{
+            //             this.roles.push(role);
+            //         })
+            //         return {username: username, roles: this.roles};
+            //     }
+            // })
+            // .catch(function (response) {
+            //     //handle error
+            //     return null;
+            // });
     }
 
     // logout
