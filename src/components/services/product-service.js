@@ -20,15 +20,15 @@ function ProductService() {
     }
 
     this.updateProduct = function(product) {
-        return axios.get(this.API_URL + `products/${id}`, { headers: authHeader() });
+        return axios.get(this.API_URL + `products/${product.id}`,product, { headers: authHeader() });
     }
 
     this.deleteProductById = function(productId) {
-        return axios.get(this.API_URL + `products/${id}`, { headers: authHeader() });
+        return axios.get(this.API_URL + `products/${productId}`, { headers: authHeader() });
     }
 
     this.addProduct = function(product) {
-        return axios.get(this.API_URL + `products/${id}`, { headers: authHeader() });
+        return axios.get(this.API_URL + `products`,product, { headers: authHeader() });
     }
 
     // cache
