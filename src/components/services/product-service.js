@@ -6,41 +6,34 @@ function ProductService() {
     // do we have an existing instance?
     if (typeof ProductService.instance === 'object') {
         return ProductService.instance;
-    } 
+    }
 
     // proceed as normal
     this.API_URL = apiUrlService.getApiURL();
 
     this.getAllProducts = function() {
-        // return axios.get(this.API_URL + 'products', { headers: authHeader() });
         return axios.get(this.API_URL + 'products');
     }
 
     this.getProductById = function(id) {
-        // return axios.get(this.API_URL + `products/${id}`, { headers: authHeader() });
         return axios.get(this.API_URL + `products/${id}`);
     }
 
     this.updateProduct = function(product) {
-        // return axios.get(this.API_URL + `products/${id}`, { headers: authHeader() });
-        return axios.put(this.API_URL + `products/${product.id}`, product );
+        return axios.get(this.API_URL + `products/${id}`, { headers: authHeader() });
     }
 
     this.deleteProductById = function(productId) {
-        // return axios.get(this.API_URL + `products/${id}`, { headers: authHeader() });
-        return axios.delete(this.API_URL + `products/${productId}`);
+        return axios.get(this.API_URL + `products/${id}`, { headers: authHeader() });
     }
 
     this.addProduct = function(product) {
-        // return axios.get(this.API_URL + `products/${id}`, { headers: authHeader() });
-        // console.log("BEFORE SENDING TO SERVER FOR POST");
-        // console.log(product);
-        return axios.post(this.API_URL + `products`, product);
+        return axios.get(this.API_URL + `products/${id}`, { headers: authHeader() });
     }
 
     // cache
 	ProductService.instance = this;
-	
+
 	// implicit return
 	return this;
 }

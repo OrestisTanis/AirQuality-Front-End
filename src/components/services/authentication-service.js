@@ -18,13 +18,9 @@ function AuthService() {
         return new Promise((resolve, reject) =>
             axios.post(this.API_URL + "register", userInfo)
             .then(res => {
-                // console.log(res);
-                // console.log(res.data);
                 this.registered = true;
-                // console.log("FROM INSIDE " + this.registered);
                 resolve(true);
             }).catch(error => {
-                // console.log(error.message);
                 this.registered = false;
                 reject(false);
             }
@@ -37,21 +33,6 @@ function AuthService() {
                 username,
                 password
             })
-            // .then((response) => {
-            //     if (response.data.token) {
-            //         localStorage.setItem("user", JSON.stringify(response.data.username));
-            //         localStorage.setItem("token", JSON.stringify(response.data.token));
-            //         localStorage.setItem("roles", JSON.stringify(response.data.roles));
-            //         (response.data.roles).forEach((role)=>{
-            //             this.roles.push(role);
-            //         })
-            //         return {username: username, roles: this.roles};
-            //     }
-            // })
-            // .catch(function (response) {
-            //     //handle error
-            //     return null;
-            // });
     }
 
     // logout
@@ -75,13 +56,11 @@ function AuthService() {
     // isUserLoggedIn
     this.isUserLoggedIn = function(){
         const result = localStorage.getItem("user") ? true : false;
-        // console.log("isLOGGEDIN: " + result);
         return result;
     }
 
      // isUserAdmin
      this.isUserAdmin = function(){
-        // console.log("this.roles: " + this.roles);
         return this.roles.includes("ROLE_ADMIN");
     }
 

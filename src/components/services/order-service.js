@@ -6,24 +6,18 @@ function OrderService() {
     // do we have an existing instance?
     if (typeof OrderService.instance === 'object') {
         return OrderService.instance;
-    } 
+    }
 
     // proceed as normal
     this.API_URL = apiUrlService.getApiURL();
 
     this.getAllOrders = function() {
-        // return axios.get(this.API_URL + 'products', { headers: authHeader() });
-        return axios.get(this.API_URL + 'orders');
-    }
-
-    this.getOrderById = function(id) {
-        // return axios.get(this.API_URL + `products/${id}`, { headers: authHeader() });
-        return axios.get(this.API_URL + `orders/${id}`);
+        return axios.get(this.API_URL + 'products', { headers: authHeader() });
     }
 
      // cache
 	OrderService.instance = this;
-	
+
 	// implicit return
 	return this;
 }
