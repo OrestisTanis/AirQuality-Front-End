@@ -2,15 +2,23 @@ version: "3"
 services:
   react:
     container_name: react_container
+    stdin_open: true
+    tty: true
     build: .
+    volumes:
+      - /app/node_modules
+      - ./:/app
+    environment:
+      - PORT=3001
+      - CHOKIDAR_USEPOLLING=true
     ports:
-      - "80:80"
+      - 3001:3001
     networks:
-      airquality_network:
-        ipv4_address: 172.24.0.2
+      aq_network:
+        ipv4_address: 172.24.0.5
 
 networks:
-  airquality_network:
+  aq_network:
     ipam:
       config:
         - subnet: 172.24.0.0/24
