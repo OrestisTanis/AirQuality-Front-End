@@ -11,13 +11,13 @@ function BackgroundVideo(props) {
         height = document.getElementById("image-poster").offsetHeight;
         if (height === 0) height = document.getElementById('video-bg').offsetHeight;
         const topPos = height;
-        console.log(topPos);
+        // console.log(topPos);
         window.scrollTo(0, topPos + 3);
     }
     return (
         <>
             <video id="video-bg" poster={poster} autoPlay muted loop>
-                <source src={"https://www.dropbox.com/s/5rq2e01773kpx0p/city.mp4?raw=1"} type="video/mp4" />
+                <source src={vid} type="video/mp4" />
             </video>
             <div className="d-md-none">
                 <img id="image-poster" src={poster} alt="" />

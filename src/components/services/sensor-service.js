@@ -14,44 +14,23 @@ function SensorService() {
     this.API_URL = apiUrlService.getApiURL();
 
     this.getNonRegisteredSensorsByUsername = function(username) {
-        // return axios.get(this.API_URL + 'Sensors', { headers: authHeader() });
-        return axios.get(this.API_URL + `soldsensoruser/${username}`);
+        return axios.get(this.API_URL + `soldsensoruser/${username}`, { headers: authHeader() });
     }
 
     this.getRegisteredSensorLocationsByUsername = function(username) {
-        // return axios.get(this.API_URL + 'Sensors', { headers: authHeader() });
-        return axios.get(this.API_URL + `sensorlocation/${username}`);
+        return axios.get(this.API_URL + `sensorlocation/${username}`, { headers: authHeader() });
     }
 
     this.deleteBySensorLocationId = function(sensorLocationId) {
-        // return axios.get(this.API_URL + `Sensors/${id}`, { headers: authHeader() });
-        console.log(sensorLocationId);
-        return axios.delete(this.API_URL + `sensorlocation/${sensorLocationId}`);
+        return axios.get(this.API_URL + `sensorlocation/${sensorLocationId}`, { headers: authHeader() });
     }
 
     this.getCurrentPm = function() {
         return axios.get(this.API_URL + `current`);
     }
 
-    this.getSensorById = function(id) {
-        // return axios.get(this.API_URL + `Sensors/${id}`, { headers: authHeader() });
-        return axios.get(this.API_URL + `Sensors/${id}`);
-    }
-
     this.registerSensor = function(sensorToRegister) {
-        return axios.post(this.API_URL + `sensor-registration`, sensorToRegister);
-    }
-
-    this.updateSensor = function(Sensor) {
-        // return axios.get(this.API_URL + `Sensors/${id}`, { headers: authHeader() });
-        return axios.put(this.API_URL + `Sensors/${Sensor.id}`, Sensor);
-    }
-
-    this.addSensor = function(Sensor) {
-        // return axios.get(this.API_URL + `Sensors/${id}`, { headers: authHeader() });
-        console.log("BEFORE SENDING TO SERVER FOR POST");
-        console.log(Sensor);
-        return axios.post(this.API_URL + `Sensors`, Sensor);
+        return axios.post(this.API_URL + `sensor-registration`, sensorToRegister, { headers: authHeader() });
     }
 
     this.getAddressFromLatLng = function (sensor) {

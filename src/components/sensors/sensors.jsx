@@ -90,7 +90,7 @@ function Sensors() {
                 }
                 else{
                     sensorToDelete = {...sensor};
-                    console.log(sensorToDelete);
+                    // console.log(sensorToDelete);
                     return false;
                 }
             })
@@ -98,7 +98,7 @@ function Sensors() {
             const tempNonRegistered = [...nonRegistered, sensorToDelete ];
             setNonRegistered(tempNonRegistered);
         }).catch((err) => {
-            console.log(err);
+            // console.log(err);
         });      
 
         

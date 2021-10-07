@@ -92,7 +92,7 @@ function Product(props) {
             cartItem.product.price = product.price;
             cartItem.product.name = product.name;
             cartItem.product.imageUrl = product.imageUrl;
-            console.log(cartItem);
+            // console.log(cartItem);
             newCart.cartItems.push(cartItem);
             localStorage.setItem('cart', JSON.stringify(newCart));
         }

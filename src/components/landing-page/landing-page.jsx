@@ -23,7 +23,7 @@ function LandingPage() {
             }).catch(error => {
                 // Handle invalid credentials
                 if (error.message) {
-                    console.log(error.message);
+                    // console.log(error.message);
                 }
             })
     }

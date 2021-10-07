@@ -12,11 +12,11 @@ function AuthGuard(props) {
         // Get token from jwt stored in client and validate the expiration date
         const token = localStorage.getItem("token");
         if (!isJWTExpiredOrNull(token)) {
-            console.log("AuthGuard: token has not expired. you are logged in.")
+            // console.log("AuthGuard: token has not expired. you are logged in.")
             setUserState(state => ({ ...state}));
         }
         else {
-            console.log("AuthGuard: token has expired or doesn't exist. Please log in.")
+            // console.log("AuthGuard: token has expired or doesn't exist. Please log in.")
             setUserState({isLoggedIn: false});
         }
     }

@@ -42,18 +42,24 @@ function Login() {
     // Gets called only if the form has no errors upon submit.
     // Used by the handler function
     async function doLogin(userInfo) {
-        const result = await authService.login(userInfo.username, userInfo.password)
-        console.log(result);
-        if (result) {
-            setUserState({isLoggedIn: true, roles: result.roles, username: result.username});
-            const path = "/";
-            history.push(path);
-        }
-        else {
+        authService.login(userInfo.username, userInfo.password)
+        .then(response=>{
+            // console.log(response.data);
+            if (response.data.token) {
+                localStorage.setItem("user", JSON.stringify(response.data.username));
+                localStorage.setItem("token", JSON.stringify(response.data.token));
+                localStorage.setItem("roles", JSON.stringify(response.data.roles));
+                setUserState({isLoggedIn: true, roles: response.data.roles, username: response.data.username});
+                const path = "/";
+                history.push(path);
+            }
+        })
+        .catch((err)=>{
+            // console.log(err);
             const errors = {};
             errors.invalidCredentials = "Invalid username or password.";
             setErrors(errors);
-        }
+        })
         // .then((res)=>{
         //     setUserState({isLoggedIn: true, roles: res.roles, username: res.username});
         //     const path = "/";

@@ -60,13 +60,13 @@ function CartItem(props) {
                             <h3 className="lead text-center" style={{ paddingTop: '1rem', fontWeight: '500' }}>{product.name}</h3>
                             <div className="row d-flex align-items-center mt-2 text-center">
                                 <div className="col-3 offset-1 ">
-                                    <button className="btn btn-success scart-product-button-container"><p className="lead scart-product-plus-button" onClick={addQuantity}>+</p></button>
+                                    <button className="btn btn-success cart-item--btn-success scart-product-button-container"  onClick={addQuantity}><p className="lead scart-product-plus-button">+</p></button>
                                 </div>
                                 <div className="col-3">
                                     <p className="lead" style={{ paddingLeft: "1rem" }} id="product-details-quantity">{item.quantity}</p>
                                 </div>
                                 <div className="col-3">
-                                    <button className="btn btn-success scart-product-button-container"><p className="lead scart-product-plus-button" id="product-details-plus-button" onClick={deductQuantity}>-</p></button>
+                                    <button className="btn btn-success cart-item--btn-success scart-product-button-container" onClick={deductQuantity}><p className="lead scart-product-plus-button" id="product-details-plus-button" >-</p></button>
                                 </div>
                                 <div className="col-12">
                                     <p style={{ paddingTop: "0.2rem", fontSize: "1.3rem" }} className="lead text-center" >&euro;{(selectedQuan * product.price).toFixed(2)}</p>
