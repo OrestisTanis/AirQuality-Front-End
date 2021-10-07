@@ -19,7 +19,7 @@ import './shared/css/shared.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/airsense">
       <AirApp />
     </BrowserRouter>
   </React.StrictMode>,
